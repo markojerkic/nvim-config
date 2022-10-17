@@ -64,7 +64,7 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Tabs
 keymap("n", "<leader>tn", "<cmd>tabnew<cr>", opts)
-keymap("n", "<leader>tx", "<cmd>tabnext<cr>", opts)
+keymap("n", "<leader>l", "<cmd>tabnext<cr>", opts)
 keymap("n", "<leader>tc", "<cmd>tabclose<cr>", opts)
 keymap("n", "<leader>to", "<cmd>tabonly<cr>", opts)
 

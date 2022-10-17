@@ -14,8 +14,7 @@ M.setup = function()
   end
 
   local config = {
-    -- disable virtual text
-    virtual_text = false,
+    virtual_text = true,
     -- show signs
     signs = {
       active = signs,
@@ -24,7 +23,7 @@ M.setup = function()
     underline = true,
     severity_sort = true,
     float = {
-      focusable = false,
+      focusable = true,
       style = "minimal",
       border = "rounded",
       source = "always",
@@ -76,7 +75,7 @@ local function lsp_keymaps(bufnr)
     bufnr,
     "n",
     "gl",
-    '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>',
+    '<cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>',
     opts
   )
   vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
