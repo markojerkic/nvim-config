@@ -25,7 +25,7 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
-keymap("n", "<leader>e", ":Lex 30<cr>", opts)
+keymap("n", "<leader>e", ":Lex 30<CR>", opts)
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
@@ -40,6 +40,12 @@ keymap("n", "<S-h>", ":bprevious<CR>", opts)
 -- Move text up and down
 keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
+
+
+keymap("n", "<A-l>", "<cmd>Format<CR>", opts)
+
+-- Reooad conf
+keymap("n", "<leader><leader>", "<cmd>source $MYVIMRC<CR>", opts)
 
 -- Insert --
 -- Press jk fast to enter
@@ -63,17 +69,17 @@ keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Tabs
-keymap("n", "<leader>tn", "<cmd>tabnew<cr>", opts)
-keymap("n", "<leader>l", "<cmd>tabnext<cr>", opts)
-keymap("n", "<leader>tc", "<cmd>tabclose<cr>", opts)
-keymap("n", "<leader>to", "<cmd>tabonly<cr>", opts)
+keymap("n", "<leader>tn", "<cmd>tabnew<CR>", opts)
+keymap("n", "<leader>l", "<cmd>tabnext<CR>", opts)
+keymap("n", "<leader>tc", "<cmd>tabclose<CR>", opts)
+keymap("n", "<leader>to", "<cmd>tabonly<CR>", opts)
 
 -- Search
-keymap("n", "<leader>n", "<cmd>noh<cr>", opts)
+keymap("n", "<leader>n", "<cmd>noh<CR>", opts)
 
 -- Telescope
-keymap("n", "<C-f>", "<cmd>Telescope git_files<cr>", opts)
-keymap("n", "<C-g>", "<cmd>Telescope live_grep<cr>", opts)
+keymap("n", "<C-f>", "<cmd>Telescope git_files<CR>", opts)
+keymap("n", "<C-g>", "<cmd>Telescope live_grep<CR>", opts)
 
 -- Terminal --
 -- Better terminal navigation

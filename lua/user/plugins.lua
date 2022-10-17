@@ -48,6 +48,9 @@ return packer.startup(function(use)
   -- Prettier
   use "sbdchd/neoformat"
 
+  -- Git
+  use "lewis6991/gitsigns.nvim"
+
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "lunarvim/darkplus.nvim"
