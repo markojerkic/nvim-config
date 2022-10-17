@@ -62,9 +62,17 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
+-- Tabs
+keymap("n", "<leader>tn", "<cmd>tabnew<cr>", opts)
+keymap("n", "<leader>tx", "<cmd>tabnext<cr>", opts)
+keymap("n", "<leader>tc", "<cmd>tabclose<cr>", opts)
+keymap("n", "<leader>to", "<cmd>tabonly<cr>", opts)
+
+-- Search
+keymap("n", "<leader>n", "<cmd>noh<cr>", opts)
 
 -- Telescope
-keymap("n", "<C-f>", "<cmd>Telescope find_files<cr>", opts)
+keymap("n", "<C-f>", "<cmd>Telescope git_files<cr>", opts)
 keymap("n", "<C-g>", "<cmd>Telescope live_grep<cr>", opts)
 
 -- Terminal --
