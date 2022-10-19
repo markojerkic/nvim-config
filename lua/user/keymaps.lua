@@ -25,7 +25,10 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
-keymap("n", "<leader>e", ":Lex 30<CR>", opts)
+--keymap("n", "<leader>e", ":Lex 30<CR>", opts)
+keymap("n", "<leader>nn", "<cmd>:NERDTreeFocus<CR>", opts)
+keymap("n", "<leader>nt", "<cmd>:NERDTreeToggle<CR>", opts)
+keymap("n", "<leader>nf", "<cmd>:NERDTreeFind<CR>", opts)
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
@@ -78,7 +81,7 @@ keymap("n", "<leader>to", "<cmd>tabonly<CR>", opts)
 keymap("n", "<leader>n", "<cmd>noh<CR>", opts)
 
 -- Telescope
-keymap("n", "<C-f>", "<cmd>Telescope git_files<CR>", opts)
+keymap("n", "<C-f>", "<cmd>Telescope find_files<CR>", opts)
 keymap("n", "<C-g>", "<cmd>Telescope live_grep<CR>", opts)
 
 -- Terminal --

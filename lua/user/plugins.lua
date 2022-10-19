@@ -46,10 +46,14 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
 
   -- Prettier
-  use "sbdchd/neoformat"
+  use('jose-elias-alvarez/null-ls.nvim')
+  use('MunifTanjim/prettier.nvim')
 
   -- Git
   use "lewis6991/gitsigns.nvim"
+
+  -- Nerdtree
+  use "preservim/nerdtree"
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
@@ -57,6 +61,10 @@ return packer.startup(function(use)
   use "folke/tokyonight.nvim"
   use "sheerun/vim-polyglot"
   use "pineapplegiant/spaceduck"
+  use "catppuccin/nvim"
+  use "nanotech/jellybeans.vim"
+  use "cocopon/iceberg.vim"
+  use "ayu-theme/ayu-vim"
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
