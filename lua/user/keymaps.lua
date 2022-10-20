@@ -30,6 +30,9 @@ keymap("n", "<leader>nn", "<cmd>:NERDTreeFocus<CR>", opts)
 keymap("n", "<leader>nt", "<cmd>:NERDTreeToggle<CR>", opts)
 keymap("n", "<leader>nf", "<cmd>:NERDTreeFind<CR>", opts)
 
+-- Code completion menu
+keymap("n", "<leader>ca", "<cmd>:CodeActionMenu<CR>", opts)
+
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
 keymap("n", "<C-Down>", ":resize +2<CR>", opts)
@@ -72,10 +75,20 @@ keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Tabs
-keymap("n", "<leader>tn", "<cmd>tabnew<CR>", opts)
-keymap("n", "<leader>l", "<cmd>tabnext<CR>", opts)
-keymap("n", "<leader>tc", "<cmd>tabclose<CR>", opts)
-keymap("n", "<leader>to", "<cmd>tabonly<CR>", opts)
+keymap("n", "<A-,>", "<cmd>BufferPrevious<CR>", opts)
+keymap("n", "<A-.>", "<cmd>BufferNext<CR>", opts)
+keymap("n", "<A-p>", "<cmd>BufferPin<CR>", opts)
+keymap("n", "<A-c>", "<cmd>BufferClose<CR>", opts)
+keymap("n", "<A-a>", "<cmd>BufferCloseAllButCurrentOrPinned<CR>", opts)
+keymap("n", "<A-<>", "<cmd>BufferMovePrevious<CR>", opts)
+keymap("n", "<A->>", "<cmd>BufferMoveNext<CR>", opts)
+-- Goto tab
+keymap("n", "<A-1>", "<cmd>BufferGoto 1<CR>", opts)
+keymap("n", "<A-2>", "<cmd>BufferGoto 2<CR>", opts)
+keymap("n", "<A-3>", "<cmd>BufferGoto 3<CR>", opts)
+keymap("n", "<A-4>", "<cmd>BufferGoto 4<CR>", opts)
+keymap("n", "<A-5>", "<cmd>BufferGoto 5<CR>", opts)
+keymap("n", "<A-6>", "<cmd>BufferGoto 6<CR>", opts)
 
 -- Search
 keymap("n", "<leader>n", "<cmd>noh<CR>", opts)
