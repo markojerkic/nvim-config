@@ -91,9 +91,15 @@ return packer.startup(function(use)
     'weilbith/nvim-code-action-menu',
     cmd = 'CodeActionMenu'
   }
+  use 'mfussenegger/nvim-jdtls' -- maven plugin
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
+
+
+  -- Markdown preview
+  use({ "iamcco/markdown-preview.nvim", run = "cd app && yarn install",
+    setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 
   -- Treesitter
   use {
