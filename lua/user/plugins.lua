@@ -66,7 +66,10 @@ return packer.startup(function(use)
   use "folke/tokyonight.nvim"
   use "sheerun/vim-polyglot"
   use "pineapplegiant/spaceduck"
-  use "catppuccin/nvim"
+  use {
+	"catppuccin/nvim",
+	as = "catppuccin",
+}
   use "nanotech/jellybeans.vim"
   use "cocopon/iceberg.vim"
   use "ayu-theme/ayu-vim"

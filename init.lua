@@ -1,6 +1,7 @@
 require "user.options"
 require "user.plugins"
 require "user.colorscheme"
+-- require "user.catppuccin"
 require "user.cmp"
 require "user.lsp"
 require "user.telescope"
