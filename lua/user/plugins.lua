@@ -46,14 +46,19 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
 
   -- Prettier
-  use('jose-elias-alvarez/null-ls.nvim')
-  use('MunifTanjim/prettier.nvim')
+  use 'jose-elias-alvarez/null-ls.nvim'
+  use 'MunifTanjim/prettier.nvim'
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons' }
+  }
 
   -- Tabs
   use {
     'romgrk/barbar.nvim',
     requires = { 'kyazdani42/nvim-web-devicons' }
   }
+
   -- Git
   use "lewis6991/gitsigns.nvim"
 
@@ -67,9 +72,9 @@ return packer.startup(function(use)
   use "sheerun/vim-polyglot"
   use "pineapplegiant/spaceduck"
   use {
-	"catppuccin/nvim",
-	as = "catppuccin",
-}
+    "catppuccin/nvim",
+    as = "catppuccin",
+  }
   use "nanotech/jellybeans.vim"
   use "cocopon/iceberg.vim"
   use "ayu-theme/ayu-vim"

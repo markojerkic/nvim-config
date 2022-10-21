@@ -1,5 +1,5 @@
 vim.g.catppuccin_flavour = "mocha"
---[[
+
 require("catppuccin").setup({
 	compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
 	transparent_background = false,
@@ -34,4 +34,3 @@ require("catppuccin").setup({
 	color_overrides = {},
 	custom_highlights = {},
 })
---]]
