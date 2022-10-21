@@ -54,10 +54,7 @@ return packer.startup(function(use)
   }
 
   -- Tabs
-  use {
-    'romgrk/barbar.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' }
-  }
+  use 'nanozuki/tabby.nvim'
 
   -- Git
   use "lewis6991/gitsigns.nvim"
