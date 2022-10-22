@@ -50,6 +50,9 @@ keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 
 keymap("n", "<A-l>", "<cmd>Format<CR>", opts)
 
+-- Neogit 
+keymap("n", "<leader>gs", "<cmd>Neogit<CR>", opts)
+
 -- Reooad conf
 keymap("n", "<leader><leader>", "<cmd>source $MYVIMRC<CR>", opts)
 
