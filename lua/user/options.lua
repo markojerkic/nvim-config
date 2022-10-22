@@ -40,3 +40,8 @@ vim.opt.shortmess:append "c"
 for k, v in pairs(options) do
     vim.opt[k] = v
 end
+
+-- highlight on yank
+vim.cmd [[
+    au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=50}
+]]
