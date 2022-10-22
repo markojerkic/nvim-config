@@ -57,6 +57,7 @@ return packer.startup(function(use)
   use 'nanozuki/tabby.nvim'
 
   -- Git
+  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
   use "lewis6991/gitsigns.nvim"
 
   -- Nerdtree
