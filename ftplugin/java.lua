@@ -22,7 +22,7 @@ WORKSPACE_PATH = home .. "/dev/"
 CONFIG = "linux"
 
 -- Find root of project
-local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle", "settings.gradle", "build.gradle.kts", "settings.gradle.kts" }
+local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "gradlew"}
 local root_dir = require("jdtls.setup").find_root(root_markers)
 if root_dir == "" then
   return
@@ -78,7 +78,7 @@ local config = {
 
     -- 💀
     "-jar",
-    vim.fn.glob(home .. "/.local/share/nvim/lsp_servers/jdtls/plugins/org.eclipse.equinox.launcher_*.jar"),
+    vim.fn.glob(home .. "~/.local/share/nvim/lsp_servers/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"),
     -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
     -- Must point to the                                                     Change this to
     -- eclipse.jdt.ls installation                                           the actual version
