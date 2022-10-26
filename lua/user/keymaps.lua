@@ -84,6 +84,7 @@ keymap("n", "<A-o>", "<cmd>tabc<CR>", opts)
 keymap("n", "<A-a>", "<cmd>tabonly<CR>", opts)
 keymap("n", "<A-<>", "<cmd>+tabmove<CR>", opts)
 keymap("n", "<A->>", "<cmd>-tabmove<CR>", opts)
+
 -- TODO
 --[[
 keymap("n", "<A-p>", "<cmd>BufferPin<CR>", opts)
