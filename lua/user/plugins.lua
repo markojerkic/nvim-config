@@ -60,6 +60,9 @@ return packer.startup(function(use)
   use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
   use "lewis6991/gitsigns.nvim"
 
+  -- Harpoon
+  use { 'theprimeagen/harpoon', requires = 'nvim-lua/plenary.nvim' }
+
   -- Nerdtree
   use "preservim/nerdtree"
 
