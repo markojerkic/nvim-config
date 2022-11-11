@@ -56,6 +56,9 @@ return packer.startup(function(use)
   -- Tabs
   use 'nanozuki/tabby.nvim'
 
+  -- Prisma
+  use 'pantharshit00/vim-prisma'
+
   -- Git
   use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
   use "lewis6991/gitsigns.nvim"

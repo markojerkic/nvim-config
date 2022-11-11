@@ -53,6 +53,9 @@ keymap("n", "<A-l>", "<cmd>Format<CR>", opts)
 -- Neogit 
 keymap("n", "<leader>gs", "v:lua require('neogit').open()<CR>", opts)
 
+-- Float error
+keymap("n", "<leader>l", "v:lua vim.diagnostic.open_float()<CR>", opts)
+
 -- Reooad conf
 keymap("n", "<leader><leader>", "<cmd>source $MYVIMRC<CR>", opts)
 
