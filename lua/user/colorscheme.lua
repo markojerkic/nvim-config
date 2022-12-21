@@ -1,8 +1,2 @@
-vim.cmd [[
-try
-  colorscheme catppuccin
-catch /^Vim\%((\a\+)\)\=:E185/
-  colorscheme default
-  set background=dark
-endtry
-]]
+-- Lua initialization file
+vim.cmd [[colorscheme nightfly]]

@@ -26,9 +26,9 @@ keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
 --keymap("n", "<leader>e", ":Lex 30<CR>", opts)
-keymap("n", "<leader>nn", "<cmd>:NERDTreeFocus<CR>", opts)
-keymap("n", "<leader>nt", "<cmd>:NERDTreeToggle<CR>", opts)
-keymap("n", "<leader>nf", "<cmd>:NERDTreeFind<CR>", opts)
+keymap("n", "<leader>nn", "<cmd>:NERDTreeFocus | only<CR>", opts)
+keymap("n", "<leader>nt", "<cmd>:NERDTreeToggle | only<CR>", opts)
+keymap("n", "<leader>nf", "<cmd>:NERDTreeFind | only<CR>", opts)
 
 -- Code completion menu
 keymap("n", "<leader>ca", "<cmd>:CodeActionMenu<CR>", opts)

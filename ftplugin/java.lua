@@ -22,7 +22,7 @@ WORKSPACE_PATH = home .. "/dev/"
 CONFIG = "linux"
 
 -- Find root of project
-local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "gradlew"}
+local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "gradlew" }
 local root_dir = require("jdtls.setup").find_root(root_markers)
 if root_dir == "" then
   return
@@ -46,7 +46,7 @@ if JAVA_DAP_ACTIVE then
     bundles,
     vim.split(
       vim.fn.glob(
-        home .. "/.config/nvim/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"
+        home .. "/.config/nvim/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.41.0jar"
       ),
       "\n"
     )
@@ -60,7 +60,7 @@ local config = {
   cmd = {
 
     -- 💀
-    "java", -- or '/path/to/java11_or_newer/bin/java'
+    "/usr/lib/jvm/java-17-openjdk-amd64/bin/java", -- or '/path/to/java11_or_newer/bin/java'
     -- depends on if `java` is in your $PATH env variable and if it points to the right version.
 
     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
@@ -78,7 +78,8 @@ local config = {
 
     -- 💀
     "-jar",
-    vim.fn.glob(home .. "~/.local/share/nvim/lsp_servers/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"),
+    vim.fn.glob(home ..
+      "~/.local/share/nvim/lsp_servers/jdtls/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.2.600.v20220720-1916.jar"),
     -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
     -- Must point to the                                                     Change this to
     -- eclipse.jdt.ls installation                                           the actual version
@@ -253,4 +254,3 @@ which_key.register(vmappings, vopts)
 --]]
 -- debugging
 -- git clone git@github.com:microsoft/java-debug.git
-
