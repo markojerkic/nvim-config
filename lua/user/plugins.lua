@@ -47,7 +47,8 @@ return packer.startup(function(use)
 
   -- Prettier
   use 'jose-elias-alvarez/null-ls.nvim'
-  use 'MunifTanjim/prettier.nvim'
+  use "prettier/vim-prettier"
+
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons' }
