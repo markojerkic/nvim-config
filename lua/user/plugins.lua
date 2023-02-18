@@ -55,10 +55,37 @@ return packer.startup(function(use)
   }
 
   -- Tabs
-  use 'nanozuki/tabby.nvim'
+  -- use 'nanozuki/tabby.nvim'
+
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+      require("which-key").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
 
   -- Prisma
   use 'pantharshit00/vim-prisma'
+
+  use {
+    'rose-pine/neovim',
+    name = 'rose-pine',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("rose-pine").setup({
+        -- dark_variant = 'moon',
+        dark_variant = 'main',
+      })
+      vim.cmd('colorscheme rose-pine')
+    end
+  }
 
   -- Git
   use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
@@ -87,6 +114,34 @@ return packer.startup(function(use)
   use "cocopon/iceberg.vim"
   use "ayu-theme/ayu-vim"
 
+
+  use {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v1.x',
+    requires = {
+      -- LSP Support
+      { 'neovim/nvim-lspconfig' }, -- Required
+      { 'williamboman/mason.nvim' }, -- Optional
+      { 'williamboman/mason-lspconfig.nvim' }, -- Optional
+
+      -- Autocompletion
+      { 'hrsh7th/nvim-cmp' }, -- Required
+      { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+      { 'hrsh7th/cmp-buffer' }, -- Optional
+      { 'hrsh7th/cmp-path' }, -- Optional
+      { 'saadparwaiz1/cmp_luasnip' }, -- Optional
+      { 'hrsh7th/cmp-nvim-lua' }, -- Optional
+
+      -- Snippets
+      { 'L3MON4D3/LuaSnip' }, -- Required
+      { 'rafamadriz/friendly-snippets' }, -- Optional
+    }
+  }
+
+  --use "williamboman/nvim-lsp-installer" -- simple to use language server installer
+
+  --[[
+  use "williamboman/mason.nvim"
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
@@ -101,7 +156,6 @@ return packer.startup(function(use)
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
-  use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
   use {
     'weilbith/nvim-code-action-menu',
@@ -112,14 +166,18 @@ return packer.startup(function(use)
   -- Debugger
   use 'mfussenegger/nvim-dap'
   use "rcarriga/nvim-dap-ui"
-
+  --]]
   -- Telescope
   use "nvim-telescope/telescope.nvim"
 
 
   -- Markdown preview
-  use({ "iamcco/markdown-preview.nvim", run = "cd app && yarn install",
-    setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && yarn install",
+    setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+    ft = { "markdown" },
+  })
 
   use 'wuelnerdotexe/vim-astro'
   -- Treesitter

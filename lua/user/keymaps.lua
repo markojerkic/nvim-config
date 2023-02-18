@@ -50,7 +50,7 @@ keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 -- Prettier
 keymap("n", "<leader>p", "<cmd>:PrettierAsync<CR>", opts)
 
-keymap("n", "<A-l>", "<cmd>Format<CR>", opts)
+keymap("n", "<A-l>", "<cmd>:LspZeroFormat<CR>", opts)
 
 -- Neogit 
 keymap("n", "<leader>gs", "v:lua require('neogit').open()<CR>", opts)
