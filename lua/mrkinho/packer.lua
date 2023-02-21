@@ -20,12 +20,12 @@ return require('packer').startup(function(use)
         end
     })
 
-    use({
+    use(
         'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' }
-    })
-    use({
+    )
+    use(
         'nvim-treesitter/playground', { run = ':TSInstall query' }
-    })
+    )
 
     use({ 'theprimeagen/harpoon', requires = ({ 'nvim-lua/plenary.nvim' }) })
     use({ 'mbbill/undotree' })
@@ -76,4 +76,17 @@ return require('packer').startup(function(use)
     use "nanotech/jellybeans.vim"
     use "cocopon/iceberg.vim"
     use "ayu-theme/ayu-vim"
+
+    use {
+        'weilbith/nvim-code-action-menu',
+        cmd = 'CodeActionMenu'
+    }
+
+    -- Markdown preview
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = "cd app && yarn install",
+        setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+        ft = { "markdown" },
+    })
 end)
