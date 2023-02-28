@@ -35,7 +35,7 @@ lsp.set_preferences({
   }
 })
 
-lsp.on_attach(function(client, bufnr)
+function lsp_keymap(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
 
   vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
@@ -47,10 +47,12 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
   --vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
   vim.keymap.set("n", "<leader>ca", function() vim.cmd.CodeActionMenu() end, opts)
-  vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-  vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
+  vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.references() end, opts)
+  vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-end)
+end
+
+lsp.on_attach(lsp_keymap)
 
 -- (Optional) Configure lua language server for neovim
 lsp.nvim_workspace()

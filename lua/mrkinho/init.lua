@@ -1,5 +1,6 @@
-require("mrkinho/remap")
-require("mrkinho/set")
+require("mrkinho.remap")
+require("mrkinho.set")
+require('mrkinho.packer')
 
 local augroup = vim.api.nvim_create_augroup
 local mrkinhoGroup = augroup('mrkinho', {})

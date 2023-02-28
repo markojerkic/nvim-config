@@ -6,18 +6,18 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_cmp_ok then
-  return
+    return
 end
 capabilities.textDocument.completion.completionItem.snippetSupport = false
 capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
 local status, jdtls = pcall(require, "jdtls")
 if not status then
-  return
+    return
 end
 -- Determine OS
 local home = os.getenv "HOME"
-WORKSPACE_PATH = home .. "/dev/"
+WORKSPACE_PATH = home .. "/.cache/jdtls-compile/"
 CONFIG = "linux"
 
 -- Find root of project
@@ -54,14 +54,14 @@ local config = {
         '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
         -- 💀
-        '-jar', '/root/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.2.700.v20221108-1024.jar',
+        '-jar', '/root/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
         -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
         -- Must point to the                                                     Change this to
         -- eclipse.jdt.ls installation                                           the actual version
 
 
         -- 💀
-        '-configuration', '/root/.local/share/nvim/mason/packages/jdtls/config_linux',
+        '-configuration', '/root/.local/share/nvim/mason/packages/jdtls/config_linux/',
         -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
         -- Must point to the                      Change to one of `linux`, `win` or `mac`
         -- eclipse.jdt.ls installation            Depending on your system.
@@ -96,6 +96,21 @@ local config = {
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
 require('jdtls').start_or_attach(config)
+
+local opts = { silent = true, remap = false }
+
+vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+vim.keymap.set("n", "<A-l>", function() vim.lsp.buf.format() end, opts)
+vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
+vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
+vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+--vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
+vim.keymap.set("n", "<leader>ca", function() vim.cmd.CodeActionMenu() end, opts)
+vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.references() end, opts)
+vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
+vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 
 
 vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)"
