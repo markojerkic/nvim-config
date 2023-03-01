@@ -91,4 +91,7 @@ return require('packer').startup(function(use)
     })
 
     use 'mfussenegger/nvim-jdtls'
+
+    -- Prettier
+    use "prettier/vim-prettier"
 end)
