@@ -50,6 +50,13 @@ function lsp_keymap(client, bufnr)
   vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.references() end, opts)
   vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+
+  -- Configure for jdtls
+  if client.name == "jdt.ls" then
+    require("jdtls").setup_dap { hotcodereplace = "auto" }
+    require("jdtls.dap").setup_dap_main_class_configs()
+    vim.lsp.codelens.refresh()
+  end
 end
 
 lsp.on_attach(lsp_keymap)
@@ -59,13 +66,14 @@ lsp.nvim_workspace()
 
 local status_ok, _ = pcall(require, "lspconfig")
 if not status_ok then
-	return
+  return
 end
 require 'lspconfig'.jdtls.setup {
-	cmd = { 'jdtls' },
-	root_dir = function(fname)
-		return require 'lspconfig'.util.root_pattern('pom.xml', 'mvnw', 'gradlew', 'gradle.build', '.git')(fname) or vim.fn.getcwd()
-	end
+  cmd = { 'jdtls' },
+  root_dir = function(fname)
+    return require 'lspconfig'.util.root_pattern('pom.xml', 'mvnw', 'gradlew', 'gradle.build', '.git')(fname) or
+    vim.fn.getcwd()
+  end
 }
 
 lsp.setup()
