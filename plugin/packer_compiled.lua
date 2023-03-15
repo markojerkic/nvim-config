@@ -250,6 +250,11 @@ _G.packer_plugins = {
     path = "/root/.local/share/nvim/site/pack/packer/start/spaceduck",
     url = "https://github.com/pineapplegiant/spaceduck"
   },
+  ["tailwindcss-colors.nvim"] = {
+    loaded = true,
+    path = "/root/.local/share/nvim/site/pack/packer/start/tailwindcss-colors.nvim",
+    url = "https://github.com/themaxmarchuk/tailwindcss-colors.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/root/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -279,6 +284,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/root/.local/share/nvim/site/pack/packer/start/vim-prettier",
     url = "https://github.com/prettier/vim-prettier"
+  },
+  vimtex = {
+    loaded = true,
+    path = "/root/.local/share/nvim/site/pack/packer/start/vimtex",
+    url = "https://github.com/lervag/vimtex"
   }
 }
 
