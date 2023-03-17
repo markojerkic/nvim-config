@@ -59,6 +59,7 @@ return require('packer').startup(function(use)
         requires = { 'kyazdani42/nvim-web-devicons' }
     }
     use "lewis6991/gitsigns.nvim"
+    use "APZelos/blamer.nvim"
 
     -- Colorschemes
     use "ellisonleao/gruvbox.nvim"
