@@ -107,6 +107,9 @@ return require('packer').startup(function(use)
     -- Prettier
     use "prettier/vim-prettier"
 
+    -- Prisma
+    use 'prisma/vim-prisma'
+
     -- LaTex
     use 'lervag/vimtex'
 

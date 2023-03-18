@@ -293,6 +293,11 @@ _G.packer_plugins = {
     path = "/root/.local/share/nvim/site/pack/packer/start/vim-prettier",
     url = "https://github.com/prettier/vim-prettier"
   },
+  ["vim-prisma"] = {
+    loaded = true,
+    path = "/root/.local/share/nvim/site/pack/packer/start/vim-prisma",
+    url = "https://github.com/prisma/vim-prisma"
+  },
   vimtex = {
     loaded = true,
     path = "/root/.local/share/nvim/site/pack/packer/start/vimtex",
