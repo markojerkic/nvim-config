@@ -50,6 +50,8 @@ function lsp_keymap(client, bufnr)
   vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.references() end, opts)
   vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+
+  require("tailwindcss-colors").buf_attach(bufnr)
 end
 
 lsp.on_attach(lsp_keymap)
