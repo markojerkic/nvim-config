@@ -56,6 +56,24 @@ return require('packer').startup(function(use)
         }
     }
 
+    -- Comments
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
+    use {
+        'JoosepAlviste/nvim-ts-context-commentstring',
+        config = function()
+            require('nvim-treesitter.configs').setup {
+                context_commentstring = {
+                    enable = true
+                }
+            }
+        end
+    }
+
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons' }
