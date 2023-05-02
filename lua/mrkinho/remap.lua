@@ -8,7 +8,7 @@ local keymap = vim.keymap.set
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 
-keymap("n", "<leader>pn", function() vim.cmd.Explore() end, opts)
+keymap("n", "<leader>e", function() vim.cmd.Explore() end, opts)
 
 -- Normal --
 -- Better window navigation
@@ -24,6 +24,37 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 
+-- Exit from visual block edit
+keymap("i", "<C-c>", "<Esc>")
+
+-- Up and down half page to center
+keymap("n", "<C-d>", "<C-d>zz")
+keymap("n", "<C-u>", "<C-u>zz")
+
+-- After search, keep search term in the middle
+keymap("n", "n", "nzzzv")
+keymap("n", "N", "Nzzzv")
+
+-- Copy to system clipboard
+keymap({"n", "v"}, "<leader>y", [["+y]])
+keymap("n", "<leader>Y", [["+Y]])
+
+-- Delete to void register
+keymap({"n", "v"}, "<leader>d", [["_d]])
+
+-- Sessionizer directly in Vim
+keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+
+-- Quickfix errors
+-- keymap("n", "<C-k>", "<cmd>cnext<CR>zz")
+-- keymap("n", "<C-j>", "<cmd>cprev<CR>zz")
+keymap("n", "<leader>k", "<cmd>cnext<CR>zz")
+keymap("n", "<leader>j", "<cmd>cprev<CR>zz")
+-- keymap("n", "<leader>k", "<cmd>lnext<CR>zz")
+-- keymap("n", "<leader>j", "<cmd>lprev<CR>zz")
+
+-- Replace the word under the cursor
+keymap("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Visual --
 -- Stay in indent mode
