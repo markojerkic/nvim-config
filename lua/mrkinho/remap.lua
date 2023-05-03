@@ -8,7 +8,7 @@ local keymap = vim.keymap.set
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 
-keymap("n", "<leader>e", function() vim.cmd.Explore() end, opts)
+keymap("n", "<C-e>", "<cmd>:Explore<CR>", opts)
 
 -- Normal --
 -- Better window navigation
