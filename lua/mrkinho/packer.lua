@@ -134,6 +134,13 @@ return require('packer').startup(function(use)
         end
     }
 
+    use({
+        "WilsonOh/emoji_picker-nvim",
+        config = function()
+            require("emoji_picker").setup()
+        end,
+    })
+
     -- Markdown preview
     use({
         "iamcco/markdown-preview.nvim",
