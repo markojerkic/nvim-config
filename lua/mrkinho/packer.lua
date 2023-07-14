@@ -31,7 +31,7 @@ return require('packer').startup(function(use)
 
     use({ 'theprimeagen/harpoon', requires = ({ 'nvim-lua/plenary.nvim' }) })
     use({ 'mbbill/undotree' })
-    use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+    use { 'NeogitOrg/neogit', requires = 'nvim-lua/plenary.nvim' }
 
     use {
         'VonHeikemen/lsp-zero.nvim',
@@ -127,11 +127,6 @@ return require('packer').startup(function(use)
         "themaxmarchuk/tailwindcss-colors.nvim",
         -- load only on require("tailwindcss-colors")
         module = "tailwindcss-colors",
-        -- run the setup function after plugin is loaded
-        config = function()
-            -- pass config options here (or nothing to use defaults)
-            require("tailwindcss-colors").setup()
-        end
     }
 
     use({
@@ -160,4 +155,7 @@ return require('packer').startup(function(use)
 
     -- LaTex
     use 'lervag/vimtex'
+
+    -- Zen mode
+    use 'folke/zen-mode.nvim'
 end)

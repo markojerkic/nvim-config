@@ -2,6 +2,7 @@ vim.opt_local.shiftwidth = 2
 vim.opt_local.tabstop = 2
 vim.opt_local.cmdheight = 2 -- more space in the neovim command line for displaying messages
 
+local fn = vim.fn
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
@@ -25,6 +26,31 @@ local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "gradlew" }
 local root_dir = require("jdtls.setup").find_root(root_markers)
 if root_dir == "" then
     return
+end
+
+local is_file_exist = function(path)
+  local f = io.open(path, 'r')
+  return f ~= nil and io.close(f)
+end
+
+local get_lombok_javaagent = function()
+  local lombok_dir = home .. '/.m2/repository/org/projectlombok/lombok/'
+  local lombok_versions = io.popen('ls -1 "' .. lombok_dir .. '" | sort -r')
+  if lombok_versions ~= nil then
+    local lb_i, lb_versions = 0, {}
+    for lb_version in lombok_versions:lines() do
+      lb_i = lb_i + 1
+      lb_versions[lb_i] = lb_version
+    end
+    lombok_versions:close()
+    if next(lb_versions) ~= nil then
+      local lombok_jar = fn.expand(string.format('%s%s/*.jar', lombok_dir, lb_versions[1]))
+      if is_file_exist(lombok_jar) then
+        return string.format('--jvm-arg=-javaagent:%s', lombok_jar)
+      end
+    end
+  end
+  return ''
 end
 
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
@@ -54,7 +80,7 @@ local config = {
         '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
         -- 💀
-        '-jar', '/root/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
+        '-jar', '/root/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.6.500.v20230622-2056.jar',
         -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
         -- Must point to the                                                     Change this to
         -- eclipse.jdt.ls installation                                           the actual version
@@ -69,7 +95,10 @@ local config = {
 
         -- 💀
         -- See `data directory configuration` section in the README
-        '-data', workspace_dir
+        '-data', workspace_dir,
+
+        -- Lombok
+        get_lombok_javaagent()
     },
     -- 💀
     -- This is the default if not provided, you can remove it. Or adjust as needed.
