@@ -1,6 +1,6 @@
 function ColourMyPencils(colour)
 	-- colour = colour or "rose-pine"
-	colour = colour or vim.g.colorscheme
+	colour = colour or vim.g.colors_name
 	vim.cmd.colorscheme(colour)
 
 	vim.api.nvim_set_hl(0, "Normal", {bg = "none"}	)
@@ -8,11 +8,11 @@ function ColourMyPencils(colour)
 end
 
 function UncolourMyPencils(colour)
-	colour = colour or vim.g.colorscheme
+	colour = colour or vim.g.colors_name
 	vim.cmd.colorscheme(colour)
 
-	vim.api.nvim_set_hl(100, "Normal", {bg = "none"}	)
-	vim.api.nvim_set_hl(100, "NormalFloat", {bg = "none"}	)
+	vim.api.nvim_set_hl(100, "Normal", {}	)
+	vim.api.nvim_set_hl(100, "NormalFloat", {}	)
 end
 
 

@@ -20,6 +20,6 @@ keymap("n", "<leader>9", function() ui.nav_file(9) end, opts)
 
 require("harpoon").setup({
     menu = {
-        width = vim.api.nvim_win_get_width(0) - 120,
+        width = vim.api.nvim_win_get_width(0) - 10,
     }
 })

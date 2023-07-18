@@ -14,29 +14,29 @@ require 'nvim-treesitter.configs'.setup {
 
   context_commentstring = {
     enable = true,
-    enable_autocmd = false,
+    -- enable_autocmd = false,
     config = {
-      javascript = {
-        __default = '// %s',
-        jsx_element = '{/* %s */}',
-        jsx_fragment = '{/* %s */}',
-        jsx_attribute = '// %s',
-        comment = '// %s',
-      },
+      -- javascript = {
+      --   __default = '// %s',
+      --   jsx_element = '{/* %s */}',
+      --   jsx_fragment = '{/* %s */}',
+      --   jsx_attribute = '// %s',
+      --   comment = '// %s',
+      -- },
       typescript = {
-        __default = '// %s',
+        __default =  '{/* %s */}',
         jsx_element = '{/* %s */}',
         jsx_fragment = '{/* %s */}',
         jsx_attribute = '// %s',
         comment = '// %s',
       },
-      tsx = {
-        __default = '// %s',
-        jsx_element = '{/* %s */}',
-        jsx_fragment = '{/* %s */}',
-        jsx_attribute = '// %s',
-        comment = '// %s',
-      },
+      -- tsx = {
+      --   __default = '// %s',
+      --   tsx_element = '{/* %s */}',
+      --   tsx_fragment = '{/* %s */}',
+      --   tsx_attribute = '// %s',
+      --   comment = '// %s',
+      -- },
     }
   },
 
