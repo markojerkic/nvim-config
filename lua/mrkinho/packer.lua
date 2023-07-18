@@ -31,7 +31,8 @@ return require('packer').startup(function(use)
 
     use({ 'theprimeagen/harpoon', requires = ({ 'nvim-lua/plenary.nvim' }) })
     use({ 'mbbill/undotree' })
-    use { 'NeogitOrg/neogit', requires = 'nvim-lua/plenary.nvim' }
+    -- use { 'NeogitOrg/neogit', requires = 'nvim-lua/plenary.nvim' }
+    use 'tpope/vim-fugitive'
 
     use {
         'VonHeikemen/lsp-zero.nvim',
