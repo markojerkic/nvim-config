@@ -36,11 +36,13 @@ keymap("n", "n", "nzzzv")
 keymap("n", "N", "Nzzzv")
 
 -- Copy to system clipboard
-keymap({"n", "v"}, "<leader>y", [["+y]])
+keymap({ "n", "v" }, "<leader>y", [["+y]])
 keymap("n", "<leader>Y", [["+Y]])
+keymap("n", "<leader>cp", [["+p]])
 
 -- Delete to void register
-keymap({"n", "v"}, "<leader>d", [["_d]])
+keymap({ "n", "v" }, "<leader>d", [["_d]])
+
 
 -- Sessionizer directly in Vim
 keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
@@ -85,4 +87,3 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- Prettier
 keymap("n", "<leader>p", vim.cmd.PrettierAsync, opts)
-

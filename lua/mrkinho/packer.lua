@@ -14,16 +14,14 @@ return require('packer').startup(function(use)
     use({
         'rose-pine/neovim',
         as = 'rose-pine',
-        config = function()
-            require("rose-pine").setup()
-            vim.cmd('colorscheme rose-pine')
-        end
     })
 
     use(
         'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' }
     )
     use("nvim-treesitter/nvim-treesitter-context");
+    -- use("nvim-treesitter/nvim-treesitter-angular", { commit = '2bb9bb73' });
+    use({ "elgiano/nvim-treesitter-angular", branch = "topic/jsx-fix" })
 
     use(
         'nvim-treesitter/playground', { run = ':TSInstall query' }
@@ -117,6 +115,7 @@ return require('packer').startup(function(use)
     use "nanotech/jellybeans.vim"
     use "cocopon/iceberg.vim"
     use "ayu-theme/ayu-vim"
+    use "rebelot/kanagawa.nvim"
 
     use {
         'weilbith/nvim-code-action-menu',
@@ -160,4 +159,9 @@ return require('packer').startup(function(use)
     use 'folke/zen-mode.nvim'
     -- Astro
     use 'wuelnerdotexe/vim-astro'
+
+    -- Databse
+    use 'tpope/vim-dadbod'
+    use 'kristijanhusak/vim-dadbod-ui'
+    use 'kristijanhusak/vim-dadbod-completion'
 end)
