@@ -128,20 +128,6 @@ return require('packer').startup(function(use)
         module = "tailwindcss-colors",
     }
 
-    use({
-        "WilsonOh/emoji_picker-nvim",
-        config = function()
-            require("emoji_picker").setup()
-        end,
-    })
-
-    -- Markdown preview
-    use({
-        "iamcco/markdown-preview.nvim",
-        run = "cd app && npm install",
-        setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
-        ft = { "markdown" },
-    })
     use { "ellisonleao/glow.nvim", config = function() require("glow").setup() end }
 
     use 'mfussenegger/nvim-jdtls'

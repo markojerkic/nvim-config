@@ -1,0 +1,68 @@
+-- local action_state = require("telescope.actions.state")
+-- local action_utils = require("telescope.actions.utils")
+-- local entry_display = require("telescope.pickers.entry_display")
+-- local finders = require("telescope.finders")
+-- local pickers = require("telescope.pickers")
+-- local conf = require("telescope.config").values
+-- local utils = require("telescope.utils")
+--
+-- local git_branch_finder = function()
+-- 	local git_branch_output = vim.fn.systemlist('git branch')
+--
+-- 	-- Process the output to remove leading spaces and asterisks
+-- 	local branches = {}
+-- 	for i, branch in ipairs(git_branch_output) do
+-- 		branch = branch:gsub('^%s*', '') -- Remove leading spaces
+-- 		branch = branch:gsub('^%*', '') -- Remove leading asterisk
+-- 		table.insert(branches, {row = i, branch = branch})
+-- 	end
+--
+--
+-- 	return finders.new_table({
+-- 		results = branches,
+-- 		entry_maker = function(entry)
+-- 			local displayer = entry_display.create({
+-- 				separator = ": ",
+-- 				items = {
+-- 					{ width = 2 },
+-- 					{ width = 50 },
+-- 					{ remaining = true },
+-- 				},
+-- 			})
+-- 			local make_display = function()
+-- 				return displayer({
+-- 					tostring(entry.row),
+-- 					entry.branch
+-- 				})
+-- 			end
+-- 			return {
+-- 				value = entry,
+-- 				ordinal = entry,
+-- 				display = make_display,
+-- 				lnum = entry.row,
+-- 				filename = entry.branch,
+-- 			}
+-- 		end,
+-- 	})
+-- end
+--
+-- local function register(opts)
+-- 	opts = opts or {}
+-- 	pickers.new(opts, {
+-- 		prompt_title = "Git switch",
+-- 		finder = git_branch_finder(),
+-- 		previewer = conf.grep_previewer(opts),
+-- 	})
+-- end
+--
+-- local has_telescope, telescope = pcall(require, "telescope")
+--
+-- if not has_telescope then
+-- 	error("harpoon.nvim requires nvim-telescope/telescope.nvim")
+-- end
+--
+-- telescope.register_extension({
+-- 	exports = {
+-- 		local_branches = register(),
+-- 	},
+-- })

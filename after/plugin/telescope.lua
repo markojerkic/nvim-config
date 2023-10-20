@@ -1,11 +1,28 @@
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<C-p>', builtin.find_files, {})
--- vim.keymap.set('n', '<leader>pg', builtin.live_grep, {})
+
+vim.keymap.set('n', '<C-p>', function()
+  builtin.find_files(require('telescope.themes').get_dropdown({
+    layout_config = {
+      width = 0.9
+    }
+  }))
+end, {})
+
 vim.keymap.set('n', '<leader>pg', function()
-  builtin.live_grep(require('telescope.themes').get_ivy({}))
+  builtin.live_grep(require('telescope.themes').get_dropdown({
+    layout_config = {
+      width = 0.9
+    }
+  }))
 end, {})
+
 vim.keymap.set('n', '<leader>pf', function()
-  builtin.git_files(require('telescope.themes').get_ivy({}))
+  builtin.git_files(require('telescope.themes').get_dropdown({
+    layout_config = {
+      width = 0.9
+    }
+  }))
 end, {})
---vim.keymap.set('n', '<leader>pb', builtin.bufferlive_greps, {})
+
 vim.keymap.set('n', '<leader>ph', builtin.help_tags, {})
+-- require("telescope").load_extension("local_branches")
