@@ -12,34 +12,6 @@ require 'nvim-treesitter.configs'.setup {
   -- List of parsers to ignore installing (for "all")
   ignore_install = {},
 
-  context_commentstring = {
-    enable = true,
-    -- enable_autocmd = false,
-    config = {
-      -- javascript = {
-      --   __default = '// %s',
-      --   jsx_element = '{/* %s */}',
-      --   jsx_fragment = '{/* %s */}',
-      --   jsx_attribute = '// %s',
-      --   comment = '// %s',
-      -- },
-      typescript = {
-        __default =  '{/* %s */}',
-        jsx_element = '{/* %s */}',
-        jsx_fragment = '{/* %s */}',
-        jsx_attribute = '// %s',
-        comment = '// %s',
-      },
-      -- tsx = {
-      --   __default = '// %s',
-      --   tsx_element = '{/* %s */}',
-      --   tsx_fragment = '{/* %s */}',
-      --   tsx_attribute = '// %s',
-      --   comment = '// %s',
-      -- },
-    }
-  },
-
   highlight = {
     enable = true,
     -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
@@ -58,3 +30,32 @@ require 'nvim-treesitter.configs'.setup {
   },
 
 }
+
+require('ts_context_commentstring').setup {
+  enable = true,
+  -- enable_autocmd = false,
+  config = {
+    -- javascript = {
+    --   __default = '// %s',
+    --   jsx_element = '{/* %s */}',
+    --   jsx_fragment = '{/* %s */}',
+    --   jsx_attribute = '// %s',
+    --   comment = '// %s',
+    -- },
+    typescript = {
+      __default = '{/* %s */}',
+      jsx_element = '{/* %s */}',
+      jsx_fragment = '{/* %s */}',
+      jsx_attribute = '// %s',
+      comment = '// %s',
+    },
+    -- tsx = {
+    --   __default = '// %s',
+    --   tsx_element = '{/* %s */}',
+    --   tsx_fragment = '{/* %s */}',
+    --   tsx_attribute = '// %s',
+    --   comment = '// %s',
+    -- },
+  }
+}
+vim.g.skip_ts_context_commentstring_module = true
