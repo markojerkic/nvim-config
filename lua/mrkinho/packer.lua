@@ -122,10 +122,29 @@ return require('packer').startup(function(use)
         cmd = 'CodeActionMenu'
     }
 
-    use {
-        "themaxmarchuk/tailwindcss-colors.nvim",
-        -- load only on require("tailwindcss-colors")
-        module = "tailwindcss-colors",
+    -- use {
+    --     "themaxmarchuk/tailwindcss-colors.nvim",
+    --     -- load only on require("tailwindcss-colors")
+    --     module = "tailwindcss-colors",
+    -- }
+
+    -- use({
+    --     "roobert/tailwindcss-colorizer-cmp.nvim",
+    --     -- optionally, override the default options:
+    --     config = function()
+    --         require("tailwindcss-colorizer-cmp").setup({
+    --             color_square_width = 2,
+    --         })
+    --     end
+    -- })
+    -- use 'NvChad/nvim-colorizer.lua'
+
+    use { 'mrshmllow/document-color.nvim', config = function()
+        require("document-color").setup {
+            -- Default options
+            mode = "background", -- "background" | "foreground" | "single"
+        }
+    end
     }
 
     use { "ellisonleao/glow.nvim", config = function() require("glow").setup() end }
