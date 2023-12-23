@@ -53,7 +53,7 @@ function Lsp_keymap(opts)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end
 
-local function attack_keymap(client, bufnr)
+local function attach_keymap(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
   Lsp_keymap(opts)
 
@@ -64,7 +64,7 @@ local function attack_keymap(client, bufnr)
 
 end
 
-lsp.on_attach(attack_keymap)
+lsp.on_attach(attach_keymap)
 
 -- (Optional) Configure lua language server for neovim
 lsp.nvim_workspace()

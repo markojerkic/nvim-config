@@ -33,6 +33,30 @@ local is_file_exist = function(path)
     return f ~= nil and io.close(f)
 end
 
+Get_java_dap = function()
+    local base_dir = home .. '/.local/share/nvim/mason/packages/java-debug-adapter/extension/server'
+    local launcher_versions = io.popen('find "' .. base_dir .. '" -type f -name "*.jar"')
+
+    if launcher_versions ~= nil then
+        local lb_i, lb_versions = 0, {}
+        for lb_version in launcher_versions:lines() do
+            lb_i = lb_i + 1
+            lb_versions[lb_i] = lb_version
+        end
+        launcher_versions:close()
+
+        if next(lb_versions) ~= nil then
+            local launcher_jar = fn.expand(string.format('%s', lb_versions[1]))
+            if is_file_exist(launcher_jar) then
+                return launcher_jar
+            end
+        end
+    end
+
+    return ''
+end
+
+
 Get_eclipse_equinix_launcher = function()
     local base_dir = home .. '/.local/share/nvim/mason/packages/jdtls/plugins/'
     local launcher_versions = io.popen('find "' .. base_dir .. '" -type f -name "org.eclipse.equinox.launcher_1.6.*.jar"')
@@ -48,7 +72,7 @@ Get_eclipse_equinix_launcher = function()
         if next(lb_versions) ~= nil then
             local launcher_jar = fn.expand(string.format('%s', lb_versions[1]))
             if is_file_exist(launcher_jar) then
-                return launcher_jar
+                return string.format('%s', launcher_jar)
             end
         end
     end
@@ -108,7 +132,7 @@ local config = {
         '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
         -- 💀
-        '-jar ', Get_eclipse_equinix_launcher(),
+         '-jar', Get_eclipse_equinix_launcher(),
 
 
         -- 💀
@@ -164,8 +188,14 @@ local config = {
     --
     -- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
     init_options = {
-        bundles = {}
+        bundles = {
+            vim.fn.glob(Get_java_dap(), 1)
+        }
     },
+
+    on_attach = function(client, bufnr)
+        require('jdtls').setup_dap({ hotcodereplace = 'auto' })
+    end
 }
 
 -- This starts a new client & server,
