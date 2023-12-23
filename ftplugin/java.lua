@@ -58,6 +58,10 @@ end
 
 Get_lombok_javaagent = function()
     local lombok_dir = home .. '/.m2/repository/org/projectlombok/lombok/'
+    if is_file_exist(lombok_dir) == false then
+        return ''
+    end
+
     local lombok_versions = io.popen('ls -1 "' .. lombok_dir .. '" | sort -r')
     if lombok_versions ~= nil then
         local lb_i, lb_versions = 0, {}
@@ -98,28 +102,21 @@ local config = {
         '-Declipse.product=org.eclipse.jdt.ls.core.product',
         '-Dlog.protocol=true',
         '-Dlog.level=ALL',
-        Get_lombok_javaagent(),
         '-Xms1g',
         '--add-modules=ALL-SYSTEM',
         '--add-opens', 'java.base/java.util=ALL-UNNAMED',
         '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
         -- 💀
-        '-jar', Get_eclipse_equinix_launcher(),
+        '-jar ', Get_eclipse_equinix_launcher(),
 
 
         -- 💀
-        '-configuration', '/root/.local/share/nvim/mason/packages/jdtls/config_linux/',
-        -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
-        -- Must point to the                      Change to one of `linux`, `win` or `mac`
-        -- eclipse.jdt.ls installation            Depending on your system.
+        '-configuration', home .. '/.local/share/nvim/mason/packages/jdtls/config_linux/',
 
 
-        -- 💀
-        -- See `data directory configuration` section in the README
         '-data', workspace_dir,
-
-        -- Lombok
+        -- Get_lombok_javaagent(),
     },
     -- 💀
     -- This is the default if not provided, you can remove it. Or adjust as needed.
@@ -170,6 +167,7 @@ local config = {
         bundles = {}
     },
 }
+
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
 require('jdtls').start_or_attach(config)
@@ -177,19 +175,6 @@ require('jdtls').start_or_attach(config)
 local opts = { silent = true, remap = false }
 
 Lsp_keymap(opts)
--- vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
--- vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
--- vim.keymap.set("n", "<A-l>", function() vim.lsp.buf.format() end, opts)
--- vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
--- vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
--- vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
--- vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
--- --vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
--- vim.keymap.set("n", "<leader>ca", function() vim.cmd.CodeActionMenu() end, opts)
--- vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.references() end, opts)
--- vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
--- vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-
 
 vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)"
 vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)"
@@ -197,3 +182,30 @@ vim.cmd "command! -buffer JdtUpdateConfig lua require('jdtls').update_project_co
 -- vim.cmd "command! -buffer JdtJol lua require('jdtls').jol()"
 vim.cmd "command! -buffer JdtBytecode lua require('jdtls').javap()"
 -- vim.cmd "command! -buffer JdtJshell lua require('jdtls').jshell()"
+
+local DEBUG_OPTIONS = '-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005';
+
+local function wrap_spring_jvm_args(args)
+    return ' -Dspring-boot.run.jvmArguments="' .. args .. '" '
+end
+
+function RunSpringBootDebug()
+    vim.ui.input({ prompt = 'Run command: ' }, function(command)
+        vim.cmd('silent !tmux neww ' ..
+            command .. wrap_spring_jvm_args(DEBUG_OPTIONS) .. ' ||  read -p "Press Enter to close the pane"')
+    end)
+end
+
+function Attach_to_java_debug()
+    local dap = require('dap')
+    dap.configurations.java = {
+        {
+            type = 'java',
+            request = 'attach',
+            name = "Attach to the process",
+            hostName = 'localhost',
+            port = '5005',
+        },
+    }
+    dap.continue()
+end
