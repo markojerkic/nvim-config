@@ -11,6 +11,8 @@ return require('packer').startup(function(use)
         -- or                            , branch = '0.1.x',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
+    use 'nvim-telescope/telescope-dap.nvim'
+
     use({
         'rose-pine/neovim',
         as = 'rose-pine',
@@ -20,14 +22,17 @@ return require('packer').startup(function(use)
         'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' }
     )
     use("nvim-treesitter/nvim-treesitter-context");
-    -- use("nvim-treesitter/nvim-treesitter-angular", { commit = '2bb9bb73' });
     use({ "elgiano/nvim-treesitter-angular", branch = "topic/jsx-fix" })
 
     use(
         'nvim-treesitter/playground', { run = ':TSInstall query' }
     )
 
-    use({ 'theprimeagen/harpoon', requires = ({ 'nvim-lua/plenary.nvim' }) })
+    use({
+        'theprimeagen/harpoon',
+        branch = "harpoon2",
+        requires = ({ 'nvim-lua/plenary.nvim' })
+    })
     use({ 'mbbill/undotree' })
     use 'tpope/vim-fugitive'
 
@@ -53,6 +58,11 @@ return require('packer').startup(function(use)
             { 'rafamadriz/friendly-snippets' }, -- Optional
         }
     }
+
+
+    -- DAP
+    use 'mfussenegger/nvim-dap'
+    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
 
     -- Comments
     use {
@@ -122,10 +132,31 @@ return require('packer').startup(function(use)
         cmd = 'CodeActionMenu'
     }
 
-    use {
-        "themaxmarchuk/tailwindcss-colors.nvim",
-        -- load only on require("tailwindcss-colors")
-        module = "tailwindcss-colors",
+    use { 'folke/neodev.nvim' }
+
+    -- use {
+    --     "themaxmarchuk/tailwindcss-colors.nvim",
+    --     -- load only on require("tailwindcss-colors")
+    --     module = "tailwindcss-colors",
+    -- }
+
+    -- use({
+    --     "roobert/tailwindcss-colorizer-cmp.nvim",
+    --     -- optionally, override the default options:
+    --     config = function()
+    --         require("tailwindcss-colorizer-cmp").setup({
+    --             color_square_width = 2,
+    --         })
+    --     end
+    -- })
+    -- use 'NvChad/nvim-colorizer.lua'
+
+    use { 'mrshmllow/document-color.nvim', config = function()
+        require("document-color").setup {
+            -- Default options
+            mode = "background", -- "background" | "foreground" | "single"
+        }
+    end
     }
 
     use { "ellisonleao/glow.nvim", config = function() require("glow").setup() end }
@@ -146,8 +177,10 @@ return require('packer').startup(function(use)
     -- Astro
     use 'wuelnerdotexe/vim-astro'
 
-    -- Databse
+    -- Database
     use 'tpope/vim-dadbod'
     use 'kristijanhusak/vim-dadbod-ui'
     use 'kristijanhusak/vim-dadbod-completion'
+
+    use("github/copilot.vim")
 end)
