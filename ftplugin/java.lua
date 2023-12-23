@@ -213,21 +213,31 @@ vim.cmd "command! -buffer JdtUpdateConfig lua require('jdtls').update_project_co
 vim.cmd "command! -buffer JdtBytecode lua require('jdtls').javap()"
 -- vim.cmd "command! -buffer JdtJshell lua require('jdtls').jshell()"
 
-local DEBUG_OPTIONS = '-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005';
+local MAVEN_DEBUG_OPTIONS = '-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005';
+local GRADLE_DEBUG_OPTIONS = '--debug-jvm';
 
 local function wrap_spring_jvm_args(args)
     return ' -Dspring-boot.run.jvmArguments="' .. args .. '" '
 end
 
-function RunSpringBootDebug()
+function RunMavenDebug()
     vim.ui.input({ prompt = 'Run command: ' }, function(command)
         vim.cmd('silent !tmux neww ' ..
-            command .. wrap_spring_jvm_args(DEBUG_OPTIONS) .. ' ||  read -p "Press Enter to close the pane"')
+            command .. wrap_spring_jvm_args(MAVEN_DEBUG_OPTIONS))
     end)
 end
 
+function RunGradleDebug()
+    vim.ui.input({ prompt = 'Run command: ' }, function(command)
+        vim.cmd('silent !tmux neww ' ..
+            command .. ' ' .. GRADLE_DEBUG_OPTIONS)
+    end)
+end
+
+
 function Attach_to_java_debug()
     local dap = require('dap')
+    local dapui = require('dapui');
     dap.configurations.java = {
         {
             type = 'java',
@@ -238,4 +248,7 @@ function Attach_to_java_debug()
         },
     }
     dap.continue()
+
+    dapui.setup()
+    dapui.open()
 end

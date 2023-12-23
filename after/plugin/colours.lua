@@ -17,9 +17,3 @@ function UncolourMyPencils(colour)
 end
 
 ColourMyPencils()
-
-function TestInput()
-	vim.ui.input({ prompt = 'Enter value for shiftwidth: ' }, function(input)
-		print("cmd: " .. input)
-	end)
-end

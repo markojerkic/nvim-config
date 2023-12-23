@@ -51,6 +51,17 @@ function Lsp_keymap(opts)
   vim.keymap.set("n", "<leader>ca", function() vim.cmd.CodeActionMenu() end, opts)
   vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+
+
+  vim.keymap.set('n', '<leader>db', ':lua require"dap".toggle_breakpoint()<CR>')
+  vim.keymap.set('n', '<leader>B', ':lua require"dap".set_breakpoint(vim.fn.input("Condition: "))<CR>')
+  vim.keymap.set('n', '<leader>bl', ':lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log: "))<CR>')
+  vim.keymap.set('n', '<leader>dr', ':lua require"dap".repl.open()<CR>')
+
+  vim.keymap.set('n', '<leader>dc', ':lua require"dap".continue()<CR>')
+  vim.keymap.set('n', '<leader>dso', ':lua require"dap".step_over()<CR>')
+  vim.keymap.set('n', '<leader>dsi', ':lua require"dap".step_into()<CR>')
+  vim.keymap.set('n', '<leader>dsso', ':lua require"dap".step_out()<CR>')
 end
 
 local function attach_keymap(client, bufnr)
@@ -61,7 +72,6 @@ local function attach_keymap(client, bufnr)
     -- Attach document colour support
     require("document-color").buf_attach(bufnr)
   end
-
 end
 
 lsp.on_attach(attach_keymap)
@@ -80,7 +90,6 @@ local function attach_tailwind(client, bufnr)
     -- Attach document colour support
     require("document-color").buf_attach(bufnr)
   end
-
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
