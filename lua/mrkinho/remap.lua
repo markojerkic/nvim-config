@@ -43,9 +43,9 @@ keymap("n", "<leader>cp", [["+p]])
 -- Delete to void register
 keymap({ "n", "v" }, "<leader>d", [["_d]])
 
-
 -- Sessionizer directly in Vim
 keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+keymap("n", "<C-b>", "<cmd>silent !tmux neww cb<CR>")
 
 -- Quickfix errors
 -- keymap("n", "<C-k>", "<cmd>cnext<CR>zz")
