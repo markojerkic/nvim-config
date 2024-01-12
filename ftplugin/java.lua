@@ -132,7 +132,7 @@ local config = {
         '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
         -- 💀
-         '-jar', Get_eclipse_equinix_launcher(),
+        '-jar', Get_eclipse_equinix_launcher(),
 
 
         -- 💀
@@ -234,21 +234,22 @@ function RunGradleDebug()
     end)
 end
 
-
 function Attach_to_java_debug()
     local dap = require('dap')
     local dapui = require('dapui');
-    dap.configurations.java = {
-        {
-            type = 'java',
-            request = 'attach',
-            name = "Attach to the process",
-            hostName = 'localhost',
-            port = '5005',
-        },
-    }
-    dap.continue()
+    vim.ui.input({ prompt = 'Port: ' }, function(port)
+        dap.configurations.java = {
+            {
+                type = 'java',
+                request = 'attach',
+                name = "Attach to the process",
+                hostName = 'localhost',
+                port = port,
+            },
+        }
+        dap.continue()
 
-    dapui.setup()
-    dapui.open()
+        dapui.setup()
+        dapui.open()
+    end)
 end
