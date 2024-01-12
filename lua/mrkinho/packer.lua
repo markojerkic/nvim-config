@@ -33,6 +33,7 @@ return require('packer').startup(function(use)
         branch = "harpoon2",
         requires = ({ 'nvim-lua/plenary.nvim' })
     })
+
     use({ 'mbbill/undotree' })
     use 'tpope/vim-fugitive'
 
