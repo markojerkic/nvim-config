@@ -66,7 +66,7 @@ local git_switch_remote = function(opts)
 				local selection = action_state.get_selected_entry()
 				actions.close(prompt_bufnr)
 				local selected_branch = selection.value:gsub('%s+', ''):gsub('%*', '')
-				vim.cmd('Git switch ' .. selected_branch)
+				vim.cmd('Git checkout ' .. selected_branch .. ' --track')
 			end
 
 			-- Use telescope actions to handle key mappings
@@ -101,6 +101,10 @@ autocmd("BufWinEnter", {
 
         vim.keymap.set("n", "<leader>fg", function ()
            git_switch()
+        end, opts)
+
+        vim.keymap.set("n", "<leader>fr", function ()
+           git_switch_remote()
         end, opts)
 
         -- NOTE: It allows me to easily set the branch i am pushing and any tracking
