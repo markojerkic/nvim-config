@@ -7,7 +7,9 @@ local lsp = require('lsp-zero').preset({
 
 -- When you don't have mason.nvim installed
 -- You'll need to list the servers installed in your system
-lsp.setup_servers({ "jdtls", 'tsserver', 'tailwindcss-language-server' })
+require('mason-lspconfig').setup({
+  ensure_installed = { "jdtls", 'tsserver', 'tailwindcss-language-server' },
+})
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -25,15 +27,32 @@ lsp.setup_nvim_cmp({
   mapping = cmp_mappings
 })
 
-lsp.set_preferences({
-  suggest_lsp_servers = false,
-  sign_icons = {
-    error = "",
-    warn = "",
-    hint = "",
-    info = ""
-  }
+lsp.set_sign_icons({
+  error = '✘',
+  warn = '▲',
+  hint = '⚑',
+  info = ''
 })
+vim.diagnostic.config({
+  virtual_text = false,
+  severity_sort = true,
+  float = {
+    style = 'minimal',
+    border = 'rounded',
+    source = 'always',
+    header = '',
+    prefix = '',
+  },
+})
+-- lsp.set_preferences({
+--   suggest_lsp_servers = false,
+--   sign_icons = {
+--     error = "",
+--     warn = "",
+--     hint = "",
+--     info = ""
+--   }
+-- })
 
 function Lsp_keymap(opts)
   local telescope = require('telescope.builtin')
@@ -104,3 +123,7 @@ require("lspconfig").tailwindcss.setup({
   on_attach = attach_tailwind,
   capabilities = capabilities
 })
+
+local lua_opts = lsp.nvim_lua_ls()
+require('lspconfig').lua_ls.setup(lua_opts)
+
