@@ -25,13 +25,3 @@ vim.keymap.set('n', '<leader>pf', function()
 end, {})
 
 vim.keymap.set('n', '<leader>ph', builtin.help_tags, {})
--- require("telescope").load_extension("local_branches")
-
-local harpoon = require("telescope").load_extension('harpoon')
-vim.keymap.set('n', '<leader>ph', function()
-  harpoon.marks(require('telescope.themes').get_dropdown({
-    layout_config = {
-      width = 0.9
-    }
-  }))
-end, {})
