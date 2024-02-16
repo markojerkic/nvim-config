@@ -22,11 +22,14 @@ WORKSPACE_PATH = home .. "/.cache/jdtls-compile/"
 CONFIG = "linux"
 
 -- Find root of project
-local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "gradlew" }
+local root_markers = { ".git", "mvnw", "gradlew" }
 local root_dir = require("jdtls.setup").find_root(root_markers)
+require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew","gradlew" })
 if root_dir == "" then
     return
 end
+-- local root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]) -- vim.loop.cwd()
+print("Root dir: "..root_dir)
 
 local is_file_exist = function(path)
     local f = io.open(path, 'r')
@@ -108,9 +111,9 @@ end
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
-local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+-- local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 
-local workspace_dir = WORKSPACE_PATH .. project_name
+local workspace_dir = WORKSPACE_PATH .. vim.fn.fnamemodify(root_dir, ":h:t") .. "/" ..vim.fn.fnamemodify(root_dir, ":t");
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
     -- The command that starts the language server
@@ -145,7 +148,7 @@ local config = {
     -- 💀
     -- This is the default if not provided, you can remove it. Or adjust as needed.
     -- One dedicated LSP server & client will be started per unique root_dir
-    root_dir = require('jdtls.setup').find_root({ '.git', 'mvnw', 'gradlew' }),
+    root_dir = root_dir,
     -- Here you can configure eclipse.jdt.ls specific settings
     -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
     -- for a list of options
@@ -189,7 +192,7 @@ local config = {
     -- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
     init_options = {
         bundles = {
-            vim.fn.glob(Get_java_dap(), 1)
+            vim.fn.glob(Get_java_dap(), true)
         }
     },
 
