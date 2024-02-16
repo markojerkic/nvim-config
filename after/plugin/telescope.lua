@@ -24,4 +24,4 @@ vim.keymap.set('n', '<leader>pf', function()
   }))
 end, {})
 
-vim.keymap.set('n', '<leader>ph', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>pp', builtin.help_tags, {})
