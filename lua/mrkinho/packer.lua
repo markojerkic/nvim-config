@@ -128,8 +128,10 @@ return require('packer').startup(function(use)
     use "rebelot/kanagawa.nvim"
 
     use {
-        'weilbith/nvim-code-action-menu',
-        cmd = 'CodeActionMenu'
+        "aznhe21/actions-preview.nvim",
+        config = function()
+            vim.keymap.set({ "v", "n" }, "<leader>ca", require("actions-preview").code_actions)
+        end,
     }
 
     use { 'folke/neodev.nvim' }
@@ -166,4 +168,13 @@ return require('packer').startup(function(use)
     use 'kristijanhusak/vim-dadbod-completion'
 
     use("github/copilot.vim")
+
+    -- refactoring
+    use {
+        "ThePrimeagen/refactoring.nvim",
+        requires = {
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-treesitter/nvim-treesitter" }
+        }
+    }
 end)
