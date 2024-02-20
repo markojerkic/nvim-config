@@ -21,7 +21,6 @@ return require('packer').startup(function(use)
         'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' }
     )
     use("nvim-treesitter/nvim-treesitter-context");
-    use({ "elgiano/nvim-treesitter-angular", branch = "topic/jsx-fix" })
 
     use(
         'nvim-treesitter/playground', { run = ':TSInstall query' }
@@ -128,9 +127,7 @@ return require('packer').startup(function(use)
     use "rebelot/kanagawa.nvim"
 
     use {
-        "aznhe21/actions-preview.nvim",
-        config = function()
-        end,
+        "aznhe21/actions-preview.nvim"
     }
 
     use { 'folke/neodev.nvim' }

@@ -24,12 +24,10 @@ CONFIG = "linux"
 -- Find root of project
 local root_markers = { ".git", "mvnw", "gradlew" }
 local root_dir = require("jdtls.setup").find_root(root_markers)
-require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew","gradlew" })
+require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew", "gradlew" })
 if root_dir == "" then
     return
 end
--- local root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]) -- vim.loop.cwd()
-print("Root dir: "..root_dir)
 
 local is_file_exist = function(path)
     local f = io.open(path, 'r')
@@ -113,7 +111,7 @@ extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
 -- local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 
-local workspace_dir = WORKSPACE_PATH .. vim.fn.fnamemodify(root_dir, ":h:t") .. "/" ..vim.fn.fnamemodify(root_dir, ":t");
+local workspace_dir = WORKSPACE_PATH .. vim.fn.fnamemodify(root_dir, ":h:t") .. "/" .. vim.fn.fnamemodify(root_dir, ":t");
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
     -- The command that starts the language server
@@ -208,6 +206,8 @@ require('jdtls').start_or_attach(config)
 local opts = { silent = true, remap = false }
 
 Lsp_keymap(opts)
+
+vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
 
 vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)"
 vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)"
