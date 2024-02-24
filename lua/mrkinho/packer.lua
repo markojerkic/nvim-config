@@ -126,9 +126,7 @@ return require('packer').startup(function(use)
     use "ayu-theme/ayu-vim"
     use "rebelot/kanagawa.nvim"
 
-    use {
-        "aznhe21/actions-preview.nvim"
-    }
+    use {'nvim-telescope/telescope-ui-select.nvim' }
 
     use { 'folke/neodev.nvim' }
 
