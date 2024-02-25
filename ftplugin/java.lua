@@ -207,7 +207,7 @@ local opts = { silent = true, remap = false }
 
 Lsp_keymap(opts)
 
--- vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
+vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
 
 vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)"
 vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)"

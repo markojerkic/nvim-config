@@ -126,7 +126,7 @@ return require('packer').startup(function(use)
     use "ayu-theme/ayu-vim"
     use "rebelot/kanagawa.nvim"
 
-    use {'nvim-telescope/telescope-ui-select.nvim' }
+    use { 'nvim-telescope/telescope-ui-select.nvim' }
 
     use { 'folke/neodev.nvim' }
 
@@ -171,4 +171,6 @@ return require('packer').startup(function(use)
             { "nvim-treesitter/nvim-treesitter" }
         }
     }
+
+    use 'vrischmann/tree-sitter-templ'
 end)
