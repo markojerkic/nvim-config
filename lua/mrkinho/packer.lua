@@ -172,5 +172,7 @@ return require('packer').startup(function(use)
         }
     }
 
+    -- Golang
     use 'vrischmann/tree-sitter-templ'
+    use 'leoluz/nvim-dap-go'
 end)
