@@ -163,6 +163,8 @@ return require('packer').startup(function(use)
 
     use("github/copilot.vim")
 
+    use { 'joeveiga/ng.nvim' }
+
     -- refactoring
     use {
         "ThePrimeagen/refactoring.nvim",
