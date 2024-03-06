@@ -50,3 +50,9 @@ vim.keymap.set('n', '<leader>dss', function()
   dapui.setup()
   dapui.open()
 end)
+
+local if_err = [[if err != nil {
+    return err
+  }]]
+
+vim.keymap.set('n', '<leader>e', 'i' .. if_err .. '<Esc>')

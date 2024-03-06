@@ -12,19 +12,10 @@ return require('packer').startup(function(use)
     }
     use 'nvim-telescope/telescope-dap.nvim'
 
-    use({
-        'rose-pine/neovim',
-        as = 'rose-pine',
-    })
-
     use(
         'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' }
     )
     use("nvim-treesitter/nvim-treesitter-context");
-
-    use(
-        'nvim-treesitter/playground', { run = ':TSInstall query' }
-    )
 
     use({
         'theprimeagen/harpoon',
@@ -109,21 +100,18 @@ return require('packer').startup(function(use)
     use "APZelos/blamer.nvim"
 
     -- Colorschemes
-    use "ellisonleao/gruvbox.nvim"
-    use "bluz71/vim-nightfly-colors"
+    use({
+        'rose-pine/neovim',
+        as = 'rose-pine',
+    })
+
     use "edeneast/nightfox.nvim"
     use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-    use "lunarvim/darkplus.nvim"
     use "folke/tokyonight.nvim"
-    use "sheerun/vim-polyglot"
-    use "pineapplegiant/spaceduck"
     use {
         "catppuccin/nvim",
         as = "catppuccin",
     }
-    use "nanotech/jellybeans.vim"
-    use "cocopon/iceberg.vim"
-    use "ayu-theme/ayu-vim"
     use "rebelot/kanagawa.nvim"
 
     use { 'nvim-telescope/telescope-ui-select.nvim' }
