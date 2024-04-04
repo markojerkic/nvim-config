@@ -24,7 +24,7 @@ CONFIG = "linux"
 -- Find root of project
 local root_markers = { ".git", "mvnw", "gradlew" }
 local root_dir = require("jdtls.setup").find_root(root_markers)
-require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew", "gradlew" })
+require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew" })
 if root_dir == "" then
     return
 end
@@ -82,6 +82,10 @@ Get_eclipse_equinix_launcher = function()
 end
 
 Get_lombok_javaagent = function()
+    if is_file_exist(home .. '/.local/share/nvim/mason/share/jdtls/lombok.jar') then
+        return string.format('-javaagent:%s', home .. '/.local/share/nvim/mason/share/jdtls/lombok.jar')
+    end
+
     local lombok_dir = home .. '/.m2/repository/org/projectlombok/lombok/'
     if is_file_exist(lombok_dir) == false then
         return ''
@@ -131,6 +135,7 @@ local config = {
         '--add-modules=ALL-SYSTEM',
         '--add-opens', 'java.base/java.util=ALL-UNNAMED',
         '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+        Get_lombok_javaagent(),
 
         -- 💀
         '-jar', Get_eclipse_equinix_launcher(),
@@ -139,9 +144,7 @@ local config = {
         -- 💀
         '-configuration', home .. '/.local/share/nvim/mason/packages/jdtls/config_linux/',
 
-
         '-data', workspace_dir,
-        -- Get_lombok_javaagent(),
     },
     -- 💀
     -- This is the default if not provided, you can remove it. Or adjust as needed.
