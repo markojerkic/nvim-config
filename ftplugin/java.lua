@@ -57,7 +57,6 @@ Get_java_dap = function()
     return ''
 end
 
-
 Get_eclipse_equinix_launcher = function()
     local base_dir = home .. '/.local/share/nvim/mason/packages/jdtls/plugins/'
     local launcher_versions = io.popen('find "' .. base_dir .. '" -type f -name "org.eclipse.equinox.launcher_1.6.*.jar"')
@@ -109,6 +108,15 @@ Get_lombok_javaagent = function()
     return ''
 end
 
+local get_bundles = function()
+    local bundles = {
+        vim.fn.glob(Get_java_dap(), true)
+    }
+    local test_runner_base_dir = home .. '/.local/share/nvim/mason/packages/java-test/extension/server/'
+    vim.list_extend(bundles, vim.split(vim.fn.glob(test_runner_base_dir .. "*.jar", true), "\n"))
+
+    return bundles
+end
 
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
@@ -192,9 +200,7 @@ local config = {
     --
     -- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
     init_options = {
-        bundles = {
-            vim.fn.glob(Get_java_dap(), true)
-        }
+        bundles = get_bundles(),
     },
 
     on_attach = function(client, bufnr)
@@ -204,14 +210,12 @@ local config = {
 
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
-require('jdtls').start_or_attach(config)
+local jdtls = require('jdtls')
+jdtls.start_or_attach(config)
 
 local opts = { silent = true, remap = false }
 
 Lsp_keymap(opts)
-
-vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
-vim.keymap.set("n", "<leader>dap", function() Attach_to_java_debug() end, opts)
 
 vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)"
 vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)"
@@ -260,3 +264,26 @@ function Attach_to_java_debug()
         dapui.open()
     end)
 end
+
+local function wrap_dap_ui(runner)
+    local dap = require('dap')
+    local dapui = require('dapui');
+    runner()
+    dap.continue()
+    dapui.setup()
+    dapui.open()
+end
+
+vim.api.nvim_create_user_command('TestMethod', function()
+    wrap_dap_ui(jdtls.test_method)
+end, {})
+
+vim.api.nvim_create_user_command('TestClass', function()
+    wrap_dap_ui(jdtls.test_class)
+end, {})
+
+vim.keymap.set("n", "<leader>dap", function() Attach_to_java_debug() end, opts)
+vim.keymap.set("n", "<leader>dt", function()
+    local jdtls_dap = require('jdtls.dap')
+    wrap_dap_ui(jdtls_dap.pick_test)
+end, opts)
