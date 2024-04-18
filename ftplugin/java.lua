@@ -268,7 +268,7 @@ end
 local function wrap_dap_ui(runner)
     local dap = require('dap')
     local dapui = require('dapui');
-    runner()
+    runner(dap)
     dap.continue()
     dapui.setup()
     dapui.open()
@@ -287,3 +287,93 @@ vim.keymap.set("n", "<leader>dt", function()
     local jdtls_dap = require('jdtls.dap')
     wrap_dap_ui(jdtls_dap.pick_test)
 end, opts)
+
+-- Read the json file at ~/.config/nvim-jdtls/dap.json
+local function get_dap_configurations()
+    local dap_config_file = home .. '/.config/nvim-jdtls/dap.json'
+    local dap_config = {}
+    if is_file_exist(dap_config_file) then
+        local file = io.open(dap_config_file, 'r')
+
+        if file == nil then
+            return {}
+        end
+
+        local content = file:read('*a')
+        file:close()
+        dap_config = vim.fn.json_decode(content)
+    end
+    return dap_config
+end
+
+-- Ask user to input main class, and module
+-- Save that config to a json file at ~/.config/nvim-jdtls/dap.json
+-- Update if already exists
+local function add_new_config()
+    local main_class = vim.fn.input('Main class: ')
+    local module = vim.fn.input('Module: ') or ''
+    local new_config = {
+        mainClass = main_class,
+        module = module
+    }
+
+    local current_config_list = get_dap_configurations()
+
+    -- Append new config to the current list
+    table.insert(current_config_list, new_config)
+
+    -- save the file
+    local dap_config_file = home .. '/.config/nvim-jdtls/dap.json'
+
+    -- if file, or the parent directory does not exist, create it
+    if not is_file_exist(dap_config_file) then
+        os.execute('mkdir -p ' .. home .. '/.config/nvim-jdtls')
+    end
+
+    -- if file does not exist, create it
+    local file = io.open(dap_config_file, 'w')
+    if file == nil then
+        return
+    end
+
+    file:write(vim.fn.json_encode(current_config_list))
+    file:close()
+    print('Config added successfully ' .. main_class)
+end
+
+vim.api.nvim_create_user_command('AddDapConfig', function()
+    add_new_config()
+end, {})
+
+-- Create a command to list all the configurations
+-- Ask user to select one
+-- Use telescope to pick
+local function list_dap_configurations()
+    local dap_config = get_dap_configurations()
+    local config_list = {}
+    for i, available_config in ipairs(dap_config) do
+        table.insert(config_list, i .. '. ' .. available_config.mainClass .. ' - ' .. available_config.module)
+    end
+
+    local selected_config = vim.fn.inputlist(config_list)
+    return dap_config[selected_config]
+end
+
+vim.api.nvim_create_user_command("DebugSpringBoot", function()
+    wrap_dap_ui(function(dap)
+        local selected_config = list_dap_configurations()
+        if selected_config == nil then
+            return
+        end
+
+        dap.configurations.java = {
+            {
+                mainClass = selected_config.mainClass,
+                projectName = selected_config.module,
+                name = "Launch " .. selected_config.mainClass,
+                request = "launch",
+                type = "java"
+            },
+        }
+    end)
+end, {})
