@@ -1,4 +1,4 @@
-vim.cmd("colorscheme catppuccin-mocha")
+vim.cmd("colorscheme rose-pine")
 
 function ColourMyPencils(colour)
 	colour = colour or vim.g.colors_name
