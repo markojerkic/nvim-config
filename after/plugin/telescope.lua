@@ -1,35 +1,20 @@
 local builtin = require('telescope.builtin')
+local drop_down_theme = require("mrkinho.telescope-util").dropdown
 
 vim.keymap.set('n', '<C-p>', function()
-    builtin.find_files(require('telescope.themes').get_dropdown({
-        layout_config = {
-            width = 0.9
-        }
-    }))
+    builtin.find_files(drop_down_theme)
 end, {})
 
 vim.keymap.set('n', '<leader>pg', function()
-    builtin.live_grep(require('telescope.themes').get_dropdown({
-        layout_config = {
-            width = 0.9
-        }
-    }))
+    builtin.live_grep(drop_down_theme)
 end, {})
 
 vim.keymap.set('n', '<leader>pf', function()
-    builtin.git_files(require('telescope.themes').get_dropdown({
-        layout_config = {
-            width = 0.9
-        }
-    }))
+    builtin.git_files(drop_down_theme)
 end, {})
 
 vim.keymap.set('n', '<leader>tr', function()
-    builtin.resume(require('telescope.themes').get_dropdown({
-        layout_config = {
-            width = 0.9
-        }
-    }))
+    builtin.resume(drop_down_theme)
 end, {})
 
 vim.keymap.set('n', '<leader>t', function()

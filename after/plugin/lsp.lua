@@ -35,11 +35,13 @@ lsp.set_preferences({
     }
 })
 
+local drop_down_theme = require("mrkinho.telescope-util").dropdown
+
 function Lsp_keymap(opts)
     local telescope = require('telescope.builtin')
-    vim.keymap.set("n", "gd", function() telescope.lsp_definitions() end, opts)
-    vim.keymap.set("n", "<leader>gr", function() telescope.lsp_references() end, opts)
-    vim.keymap.set("n", "<leader>gi", function() telescope.lsp_implementations() end, opts)
+    vim.keymap.set("n", "gd", function() telescope.lsp_definitions(drop_down_theme) end, opts)
+    vim.keymap.set("n", "<leader>gr", function() telescope.lsp_references(drop_down_theme) end, opts)
+    vim.keymap.set("n", "<leader>gi", function() telescope.lsp_implementations(drop_down_theme) end, opts)
 
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
     vim.keymap.set("n", "<A-l>", function() vim.lsp.buf.format() end, opts)
