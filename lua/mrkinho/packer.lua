@@ -126,21 +126,11 @@ return require('packer').startup(function(use)
     end
     }
 
-    use { "ellisonleao/glow.nvim", config = function() require("glow").setup() end }
-
     use 'mfussenegger/nvim-jdtls'
 
-    -- Prettier
-    use "prettier/vim-prettier"
+    -- -- LaTex
+    -- use 'lervag/vimtex'
 
-    -- Prisma
-    use 'prisma/vim-prisma'
-
-    -- LaTex
-    use 'lervag/vimtex'
-
-    -- Zen mode
-    use 'folke/zen-mode.nvim'
     -- Astro
     use 'wuelnerdotexe/vim-astro'
 

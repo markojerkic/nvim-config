@@ -83,4 +83,4 @@ keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- Prettier
-keymap("n", "<leader>p", vim.cmd.PrettierAsync, opts)
+keymap("n", "<leader>p", function() vim.lsp.buf.format({ name = "prettier" }) end, opts)
