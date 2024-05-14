@@ -210,12 +210,12 @@ local config = {
 
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
-local jdtls = require('jdtls')
 jdtls.start_or_attach(config)
 
 local opts = { silent = true, remap = false }
 
-Lsp_keymap(opts)
+local lsp_config = require("marko.config.lsp")
+lsp_config.lsp_keymap(opts)
 
 vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)"
 vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)"
@@ -275,7 +275,7 @@ local function wrap_dap_ui(runner)
 end
 
 vim.api.nvim_create_user_command('TestMethod', function()
-    wrap_dap_ui(jdtls.test_method)
+    wrap_dap_ui(jdtls.test_nearest_method)
 end, {})
 
 vim.api.nvim_create_user_command('TestClass', function()
