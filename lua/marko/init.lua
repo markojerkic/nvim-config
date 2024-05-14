@@ -1,9 +1,9 @@
-require("mrkinho.remap")
-require("mrkinho.set")
-require('mrkinho.packer')
+require("marko.set")
+require("marko.remap")
+require('marko.color')
 
 local augroup = vim.api.nvim_create_augroup
-local mrkinhoGroup = augroup('mrkinho', {})
+local markoGroup = augroup('mrkinho', {})
 
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup('HighlightYank', {})
@@ -24,11 +24,9 @@ autocmd('TextYankPost', {
 })
 
 autocmd({"BufWritePre"}, {
-    group = mrkinhoGroup,
+    group = markoGroup,
     pattern = "*",
     command = [[%s/\s\+$//e]],
 })
 
-vim.g.netrw_browse_split = 0
-vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 25
+

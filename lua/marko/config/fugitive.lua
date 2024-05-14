@@ -149,3 +149,4 @@ autocmd("BufWinEnter", {
 		vim.keymap.set("n", "<leader>gs", ":Git switch -c ", opts);
 	end,
 })
+

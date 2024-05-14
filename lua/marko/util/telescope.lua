@@ -7,3 +7,4 @@ M.dropdown = require('telescope.themes').get_dropdown({
 })
 
 return M
+

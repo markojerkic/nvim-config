@@ -1,5 +1,5 @@
 local builtin = require('telescope.builtin')
-local drop_down_theme = require("mrkinho.telescope-util").dropdown
+local drop_down_theme = require("marko.util.telescope").dropdown
 
 vim.keymap.set('n', '<C-p>', function()
     builtin.find_files(drop_down_theme)
