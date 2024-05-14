@@ -1,9 +1,8 @@
 require("marko.set")
 require("marko.remap")
-require('marko.color')
 
 local augroup = vim.api.nvim_create_augroup
-local markoGroup = augroup('mrkinho', {})
+local markoGroup = augroup('marko', {})
 
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup('HighlightYank', {})

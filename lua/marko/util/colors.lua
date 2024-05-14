@@ -1,4 +1,6 @@
-function ColourMyPencils(colour)
+local M = {}
+
+M.colourMyPencils = function(colour)
     colour = colour or vim.g.colors_name
     vim.cmd.colorscheme(colour)
 
@@ -6,7 +8,7 @@ function ColourMyPencils(colour)
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
-function UncolourMyPencils(colour)
+M.uncolourMyPencils = function(colour)
     colour = colour or vim.g.colors_name
     vim.cmd.colorscheme(colour)
 
@@ -14,4 +16,4 @@ function UncolourMyPencils(colour)
     vim.api.nvim_set_hl(100, "NormalFloat", {})
 end
 
-ColourMyPencils()
+return M

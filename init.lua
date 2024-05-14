@@ -14,7 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 require("marko")
 require("lazy").setup({
     import = "plugins",
-    install = {
-        colorscheme = { "rose-pine" },
-    }
+}, {
+    change_detection = {
+        notify = false,
+    },
 })

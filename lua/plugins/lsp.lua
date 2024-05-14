@@ -76,6 +76,11 @@ return {
                 -- keymaps.lsp_keymaps({ buffer = bufnr, remap = false })
                 local opts = { buffer = bufnr, remap = false }
                 keymaps.lsp_keymap(opts)
+
+                if client.server_capabilities.colorProvider then
+                    -- Attach document colour support
+                    require("document-color").buf_attach(bufnr)
+                end
             end)
 
             require('mason-lspconfig').setup({
@@ -95,6 +100,16 @@ return {
                     end,
                 }
             })
+        end
+    },
+
+    {
+        'mrshmllow/document-color.nvim',
+        config = function()
+            require("document-color").setup {
+                -- Default options
+                mode = "background", -- "background" | "foreground" | "single"
+            }
         end
     }
 }
