@@ -2,13 +2,20 @@ local opts = { noremap = true, silent = true }
 
 local term_opts = { silent = true }
 
--- Shorten function name
+-- Shorten function nme
 local keymap = vim.keymap.set
+
+-- These mappings control the size of splits (height/width)
+keymap("n", "<M-,>", "<c-w>5<")
+keymap("n", "<M-.>", "<c-w>5>")
+keymap("n", "<M-+>", "<C-W>+")
+keymap("n", "<M-->", "<C-W>-")
 
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 
 keymap("n", "<C-e>", "<cmd>:Explore<CR>", opts)
+keymap("n", "<S-e>", "<cmd>:Vexplore<CR>", opts)
 
 -- Normal --
 -- Better window navigation
