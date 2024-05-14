@@ -112,5 +112,8 @@ return {
                 mode = "background", -- "background" | "foreground" | "single"
             }
         end
-    }
+    },
+
+    { 'mfussenegger/nvim-dap' },
+    { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } }
 }
