@@ -8,7 +8,11 @@ M.lsp_keymap = function(opts)
     vim.keymap.set("n", "<leader>gi", function() telescope.lsp_implementations(drop_down_theme) end, opts)
 
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-    vim.keymap.set("n", "<A-l>", function() vim.lsp.buf.format() end, opts)
+    vim.keymap.set("n", "<A-l>", function()
+        vim.lsp.buf.format({
+            filter = function(client) return client.name ~= "tsserver" end
+        })
+    end, opts)
     vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
     vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
     vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
