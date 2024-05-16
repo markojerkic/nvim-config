@@ -3,14 +3,14 @@ local drop_down_theme = require("marko.util.telescope").dropdown
 
 M.lsp_keymap = function(opts)
     local telescope = require('telescope.builtin')
-    vim.keymap.set("n", "gd", function() telescope.lsp_definitions(drop_down_theme) end, opts)
+    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
     vim.keymap.set("n", "<leader>gr", function() telescope.lsp_references(drop_down_theme) end, opts)
     vim.keymap.set("n", "<leader>gi", function() telescope.lsp_implementations(drop_down_theme) end, opts)
 
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
     vim.keymap.set("n", "<A-l>", function()
         vim.lsp.buf.format({
-            filter = function(client) return client.name ~= "tsserver" end
+            filter = function(client) return client.name ~= "tsserver" end,
         })
     end, opts)
     vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)

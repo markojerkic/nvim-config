@@ -42,6 +42,7 @@ vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 
 vim.opt.shortmess:append "c"
+vim.cmd[[let g:ftplugin_sql_omni_key = '<C-j>']]
 
 for k, v in pairs(options) do
     vim.opt[k] = v
