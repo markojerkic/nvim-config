@@ -19,9 +19,19 @@ return {
     -- Autocompletion
     {
         'hrsh7th/nvim-cmp',
-        event = 'InsertEnter',
+        lazy = false,
+        priority = 100,
         dependencies = {
-            { 'L3MON4D3/LuaSnip' },
+            { 'L3MON4D3/LuaSnip',
+                'rafamadriz/friendly-snippets',
+                "onsails/lspkind.nvim",
+                "hrsh7th/cmp-nvim-lsp",
+                "hrsh7th/cmp-path",
+                "hrsh7th/cmp-vsnip",
+                "hrsh7th/vim-vsnip",
+                "hrsh7th/cmp-buffer",
+                "saadparwaiz1/cmp_luasnip",
+            },
         },
         config = function()
             -- Here is where you configure the autocompletion settings.
@@ -33,6 +43,18 @@ return {
             local cmp_action = lsp_zero.cmp_action()
 
             cmp.setup({
+                sources = {
+                    { name = "nvim_lsp" },
+                    { name = 'nvim_lsp_signature_help' },
+                    { name = "vsnip" },
+                    { name = "path" },
+                    { name = "buffer" },
+                },
+                snippet = {
+                    expand = function(args)
+                        require('luasnip').lsp_expand(args.body)
+                    end,
+                },
                 formatting = lsp_zero.cmp_format({ details = true }),
                 mapping = cmp.mapping.preset.insert({
                     ['<C-Space>'] = cmp.mapping.complete(),
@@ -45,12 +67,21 @@ return {
                     ['<Tab>'] = nil,
                     ['<S-Tab>'] = nil
                 }),
-                snippet = {
-                    expand = function(args)
-                        require('luasnip').lsp_expand(args.body)
-                    end,
+            })
+
+            -- Setup up vim-dadbod
+            cmp.setup.filetype({ "sql" }, {
+                sources = {
+                    { name = "vim-dadbod-completion" },
+                    { name = "buffer" },
                 },
             })
+
+            local ls = require "luasnip"
+            ls.config.set_config {
+                history = false,
+                updateevents = "TextChanged,TextChangedI",
+            }
         end
     },
 
