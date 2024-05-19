@@ -16,4 +16,11 @@ M.uncolourMyPencils = function(colour)
     vim.api.nvim_set_hl(100, "NormalFloat", {})
 end
 
+vim.api.nvim_create_user_command('ColorMyPencils', function()
+    M.colourMyPencils()
+end, {})
+vim.api.nvim_create_user_command('UncolorMyPencils', function()
+    M.uncolourMyPencils()
+end, {})
+
 return M
