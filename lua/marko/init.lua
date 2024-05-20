@@ -1,5 +1,6 @@
 require("marko.set")
 require("marko.remap")
+require("marko.util.terminal")
 
 local augroup = vim.api.nvim_create_augroup
 local markoGroup = augroup('marko', {})
