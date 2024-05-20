@@ -1,4 +1,4 @@
-vim.keymap.set('n', '<C-t>', function()
+vim.keymap.set({ 'n', 't' }, '<C-t>', function()
     local current_open_tab = vim.api.nvim_get_current_tabpage()
     local current_tabs = vim.api.nvim_list_tabpages()
     if current_open_tab == 1 then

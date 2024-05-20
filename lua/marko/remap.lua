@@ -48,8 +48,11 @@ keymap("n", "<leader>cp", [["+p]])
 keymap({ "n", "v" }, "<leader>d", [["_d]])
 
 -- Sessionizer directly in Vim
-keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-keymap("n", "<C-b>", "<cmd>silent !tmux neww cb<CR>")
+keymap({ "n", "t" }, "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+keymap({ "n", "t" }, "<C-b>", "<cmd>silent !tmux neww cb<CR>")
+keymap({ "n", "t" }, "<A-o>", function()
+    require("marko.util.colors").toggleColouredPencils()
+end)
 
 -- Quickfix errors
 -- keymap("n", "<C-k>", "<cmd>cnext<CR>zz")
