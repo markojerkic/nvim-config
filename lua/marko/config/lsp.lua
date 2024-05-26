@@ -8,6 +8,7 @@ M.lsp_keymap = function(opts)
     vim.keymap.set("n", "gr", function() telescope.lsp_references(drop_down_theme) end, opts)
     vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.references() end, opts)
     vim.keymap.set("n", "<leader>gtr", function() telescope.lsp_references(drop_down_theme) end, opts)
+    vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
     vim.keymap.set("n", "<leader>gi", function() telescope.lsp_implementations(drop_down_theme) end, opts)
 
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
@@ -30,7 +31,6 @@ M.lsp_keymap = function(opts)
     vim.keymap.set('n', '<leader>bl', ':lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log: "))<CR>')
     vim.keymap.set('n', '<leader>dr', ':lua require"dap".repl.toggle()<CR>')
 
-    -- Eval dap-ui on hover
     vim.keymap.set('n', 'L', function() require("dapui").eval() end, opts)
 
     vim.keymap.set('n', '<leader>dc', ':lua require"dap".continue()<CR>')
