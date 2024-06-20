@@ -101,7 +101,7 @@ return {
     {
         'tpope/vim-fugitive',
         config = function()
-            require("marko.config.fugitive")
+            require("marko.config.fugitive").setup()
         end
 
     }
