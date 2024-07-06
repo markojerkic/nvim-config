@@ -159,7 +159,10 @@ return {
                 dapui.close()
             end
 
-            vim.keymap.set("n", "<leader>dl", dapui.close, {})
+            vim.keymap.set("n", "<leader>dl", function()
+                dapui.setup()
+                dapui.toggle()
+            end, {})
 
             vim.fn.sign_define('DapBreakpoint', { text = '' })
         end,
