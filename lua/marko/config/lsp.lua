@@ -39,4 +39,47 @@ M.lsp_keymap = function(opts)
     vim.keymap.set('n', '<leader>dsso', ':lua require"dap".step_out()<CR>')
 end
 
+M.config_ts_dap = function()
+    local js_based_languages = { "typescript", "javascript", "typescriptreact" }
+    for _, language in ipairs(js_based_languages) do
+        require('dap').configurations[language] = {
+            {
+                type = "pwa-node",
+                request = "launch",
+                name = "Launch file",
+                program = "${file}",
+                cwd = "${workspaceFolder}",
+            },
+            -- launch vitest tests
+            {
+                type = "node-terminal",
+                request = "launch",
+                name = "Launch current test file",
+                program = "${file}",
+                cwd = "${workspaceFolder}",
+                args = { "--testFile=${relativeFile}" },
+                console = "integratedTerminal",
+                internalConsoleOptions = "neverOpen",
+                skipFiles = { "<node_internals>/**" },
+            },
+            {
+                type = "pwa-node",
+                request = "attach",
+                name = "Attach",
+                processId = require 'dap.utils'.pick_process,
+                cwd = "${workspaceFolder}",
+            },
+            {
+                type = "pwa-chrome",
+                request = "launch",
+                name = "Start Chrome with \"localhost\"",
+                url = "http://localhost:3000",
+                webRoot = "${workspaceFolder}",
+                userDataDir = "${workspaceFolder}/.vscode/vscode-chrome-debug-userdatadir"
+            }
+        }
+    end
+end
+
+
 return M;
