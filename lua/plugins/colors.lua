@@ -4,6 +4,7 @@ return {
     },
     {
         "catppuccin/nvim",
+        lazy = false,
         name = "catppuccin",
         -- optionally set the colorscheme within lazy config
         init = function()
@@ -15,7 +16,6 @@ return {
     {
         "rose-pine/neovim",
         name = "rose-pine",
-        lazy = false,
     },
     {
         "olivercederborg/poimandres.nvim",
