@@ -1,6 +1,23 @@
 local M = {}
 local drop_down_theme = require("marko.util.telescope").dropdown
 
+local hasBiome = function()
+    local hasBiome = false
+
+    local filterFn = function(client)
+        return client.name == "biome"
+    end
+
+    for _, client in ipairs(vim.lsp.get_clients()) do
+        if filterFn(client) then
+            hasBiome = true
+            break
+        end
+    end
+
+    return hasBiome
+end
+
 M.lsp_keymap = function(opts)
     local telescope = require('telescope.builtin')
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
@@ -13,8 +30,10 @@ M.lsp_keymap = function(opts)
 
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
     vim.keymap.set("n", "<A-l>", function()
+        local formatterFilter = hasBiome() and function(client) return client.name ~= "tsserver" end or nil
+
         vim.lsp.buf.format({
-            -- filter = function(client) return client.name ~= "tsserver" end,
+            filter = formatterFilter
         })
     end, opts)
     vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
