@@ -269,9 +269,9 @@ local function wrap_dap_ui(runner)
     local dap = require('dap')
     local dapui = require('dapui');
     runner(dap)
-    dap.continue()
     dapui.setup()
     dapui.open()
+    dap.continue()
 end
 
 vim.api.nvim_create_user_command('TestMethod', function()
