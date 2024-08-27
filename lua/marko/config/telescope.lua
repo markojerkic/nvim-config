@@ -13,6 +13,10 @@ vim.keymap.set('n', '<leader>pf', function()
     builtin.git_files(drop_down_theme)
 end, {})
 
+vim.keymap.set('n', '<leader>pc', function()
+    builtin.colorschemeGetResources(drop_down_theme)
+end, {})
+
 vim.keymap.set('n', '<leader>tr', function()
     builtin.resume(drop_down_theme)
 end, {})
