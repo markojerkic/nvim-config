@@ -13,10 +13,10 @@ require('dap-go').setup {
     },
     {
       type = "go",
-      name = "Debug cmd/server.go",
+      name = "Debug cmd/server/main.go",
       request = "launch",
       program = "./cmd/server/main.go",
-    }
+    },
   },
   -- delve configurations
   delve = {
