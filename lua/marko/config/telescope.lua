@@ -26,3 +26,19 @@ vim.keymap.set('n', '<leader>t', function()
 end, {})
 
 vim.keymap.set('n', '<leader>pp', builtin.help_tags, {})
+
+-- Ignore certain files and directories, like .cert and .png, .ico
+require("telescope").setup {
+    defaults = {
+        file_ignore_patterns = {
+            "%.crt$",
+            "%.csr$",
+            "%.key$",
+            "%.lockb$",
+            "%.cert$",
+            "%.ico$",
+            "%.png$",
+            "%.jpg$",
+        }
+    }
+}
