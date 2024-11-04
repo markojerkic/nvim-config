@@ -29,10 +29,8 @@ M.lsp_keymap = function(opts)
     vim.keymap.set("n", "<leader>gi", function() telescope.lsp_implementations(drop_down_theme) end, opts)
 
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-    vim.keymap.set("n", "<A-l>", function()
-        local formatterFilter = hasBiome() and function(client) return client.name == "biome" end or nil
-
-        vim.lsp.buf.format()
+    vim.keymap.set("n", "<A-l>", function(args)
+        require("conform").format({ bufnr = vim.api.nvim_get_current_buf() })
     end, opts)
     vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
     vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
