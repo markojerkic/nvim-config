@@ -1,23 +1,6 @@
 local M = {}
 local drop_down_theme = require("marko.util.telescope").dropdown
 
-local hasBiome = function()
-    local hasBiome = false
-
-    local filterFn = function(client)
-        return client.name == "biome"
-    end
-
-    for _, client in ipairs(vim.lsp.get_clients()) do
-        if filterFn(client) then
-            hasBiome = true
-            break
-        end
-    end
-
-    return hasBiome
-end
-
 M.lsp_keymap = function(opts)
     local telescope = require('telescope.builtin')
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
@@ -29,13 +12,13 @@ M.lsp_keymap = function(opts)
     vim.keymap.set("n", "<leader>gi", function() telescope.lsp_implementations(drop_down_theme) end, opts)
 
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-    vim.keymap.set("n", "<A-l>", function(args)
+    vim.keymap.set("n", "<A-l>", function()
         require("conform").format({ bufnr = vim.api.nvim_get_current_buf() })
     end, opts)
     vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
     vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-    vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
-    vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
+    vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
+    vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
     vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
     vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
