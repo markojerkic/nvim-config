@@ -82,5 +82,11 @@ return {
                 require("lazy").load({ plugins = { "nvim-treesitter-textobjects" } })
             end)
         end,
+    },
+    {
+        "davidmh/mdx.nvim",
+        config = true,
+        dependencies = { "nvim-treesitter/nvim-treesitter" }
     }
+
 }
