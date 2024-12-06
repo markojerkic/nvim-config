@@ -6,6 +6,7 @@ return {
         },
         config = function()
             require('marko.config.telescope')
+            require("marko.config.background-image").setup()
         end,
     },
     {
