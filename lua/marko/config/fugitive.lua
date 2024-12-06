@@ -29,7 +29,7 @@ M.setup = function()
                 end,
             },
             sorter = sorters.get_generic_fuzzy_sorter(),
-            attach_mappings = function(prompt_bufnr, map)
+            attach_mappings = function(prompt_bufnr, _)
                 local switch_selection = function()
                     local selection = action_state.get_selected_entry()
                     actions.close(prompt_bufnr)
@@ -65,7 +65,7 @@ M.setup = function()
                 end,
             },
             sorter = sorters.get_generic_fuzzy_sorter(),
-            attach_mappings = function(prompt_bufnr, map)
+            attach_mappings = function(prompt_bufnr, _)
                 local switch_selection = function()
                     local selection = action_state.get_selected_entry()
                     actions.close(prompt_bufnr)
@@ -100,7 +100,7 @@ M.setup = function()
                 end,
             },
             sorter = sorters.get_generic_fuzzy_sorter(),
-            attach_mappings = function(prompt_bufnr, map)
+            attach_mappings = function(prompt_bufnr, _)
                 local switch_selection = function()
                     local selection = action_state.get_selected_entry()
                     actions.close(prompt_bufnr)

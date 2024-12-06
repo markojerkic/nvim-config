@@ -37,7 +37,7 @@ function M.setup()
             file_ignore_patterns = { "*" }, -- Clear any ignore patterns
             previewer = previewers.new_termopen_previewer({
                 get_command = function(entry)
-                    local width = math.floor(vim.o.columns / 2.5)
+                    local width = math.floor(vim.o.columns / 2.2)
                     local height = math.floor(width * 0.3) -- Calculate proportional height
                     print("Image size: " .. string.format('%dx%d', width, height))
 
