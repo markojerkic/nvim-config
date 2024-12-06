@@ -1,27 +1,19 @@
 local M = {}
 
-function M.check_requirements()
+local function check_requirements()
     local chafa = vim.fn.executable('chafa')
     if chafa == 0 then
         print("chafa is not installed. Running `sudo apt install chafa`")
-        vim.fn.system('sudo apt install chafa')
+        return false
     end
-end
-
-function M.get_image_dimensions(filepath)
-    local cmd = string.format("identify -format '%%w %%h' '%s'", filepath)
-    local result = vim.fn.systemlist(cmd)
-
-    if #result > 0 then
-        local width, height = result[1]:match("(%d+) (%d+)")
-        return tonumber(width), tonumber(height)
-    end
-
-    return nil, nil
+    return true
 end
 
 function M.setup()
-    M.check_requirements()
+    local has_requirements = check_requirements()
+    if not has_requirements then
+        return
+    end
 
     local builtin = require('telescope.builtin')
     local actions = require('telescope.actions')
