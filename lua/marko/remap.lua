@@ -14,8 +14,10 @@ keymap("n", "<M-->", "<C-W>-")
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 
-keymap("n", "<C-e>", "<cmd>:Explore<CR>", opts)
-keymap("n", "<S-e>", "<cmd>:Vexplore<CR>", opts)
+keymap("n", "<C-e>", "<cmd>:Oil<CR>", opts)
+keymap("n", "<S-e>", function()
+    require("oil").open_float()
+end, opts)
 
 -- Normal --
 -- Better window navigation
