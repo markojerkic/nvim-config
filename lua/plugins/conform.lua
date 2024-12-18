@@ -19,9 +19,11 @@ return {
                 -- Conform will run the first available formatter
                 javascript = { "prettier", "biome", stop_after_first = true },
                 typescript = { "prettier", "biome", stop_after_first = true },
+                json = { "prettier", "biome", stop_after_first = true },
                 html = { "prettier", "biome", stop_after_first = true },
                 css = { "prettier", "biome", stop_after_first = true },
                 tsx = { "prettier", "biome", stop_after_first = true },
+                sql = {format_after_save = false}
             },
             formatters = {
                 google_java_format = {
@@ -31,6 +33,9 @@ return {
                 },
             },
             format_after_save = {
+                lsp_format = "fallback",
+            },
+            default_format_opts = {
                 lsp_format = "fallback",
             },
         })

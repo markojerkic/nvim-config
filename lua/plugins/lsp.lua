@@ -18,6 +18,13 @@ return {
 
     -- Autocompletion
     {
+        "L3MON4D3/LuaSnip",
+        -- follow latest release.
+        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        -- install jsregexp (optional!).
+        build = "make install_jsregexp"
+    },
+    {
         'hrsh7th/nvim-cmp',
         lazy = false,
         priority = 100,
@@ -46,7 +53,7 @@ return {
                 sources = {
                     { name = "nvim_lsp" },
                     { name = 'nvim_lsp_signature_help' },
-                    -- { name = "vsnip" },
+                    { name = "vsnip" },
                     { name = "path" },
                     { name = "buffer" },
                 },
@@ -116,7 +123,7 @@ return {
             end)
 
             require('mason-lspconfig').setup({
-                ensure_installed = {},
+                ensure_installed = { "eslint" },
                 handlers = {
                     -- this first function is the "default handler"
                     -- it applies to every language server without a "custom handler"
