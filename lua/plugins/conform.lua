@@ -7,23 +7,21 @@ return {
 
         require("conform").setup({
             formatters_by_ft = {
-                lua = { "stylua" },
+                lua = { "stylua", lsp_format = "fallback" },
                 -- Conform will run multiple formatters sequentially
                 python = { "isort", "black" },
                 -- You can customize some of the format options for the filetype (:help conform.format)
                 rust = { "rustfmt", lsp_format = "fallback" },
 
-                -- java = { "googlejavaformat", stop_after_first = true },
                 java = { "google_java_format" },
 
                 -- Conform will run the first available formatter
-                javascript = { "prettier", "biome", stop_after_first = true },
-                typescript = { "prettier", "biome", stop_after_first = true },
-                json = { "prettier", "biome", stop_after_first = true },
-                html = { "prettier", "biome", stop_after_first = true },
-                css = { "prettier", "biome", stop_after_first = true },
-                tsx = { "prettier", "biome", stop_after_first = true },
-                sql = {format_after_save = false}
+                javascript = { "biome", "prettier", stop_after_first = true },
+                typescript = { "biome", "prettier", stop_after_first = true },
+                json = { "biome", "prettier", stop_after_first = true },
+                html = { "biome", "prettier", stop_after_first = true },
+                css = { "biome", "prettier", stop_after_first = true },
+                tsx = { "biome", "prettier", stop_after_first = true },
             },
             formatters = {
                 google_java_format = {
