@@ -9,64 +9,31 @@ return {
         },
         build = ":TSUpdate",
         lazy = false,
-
-        ---@type TSConfig
-        ---@diagnostic disable-next-line: missing-fields
+        init = function()
+            -- Only start treesitter after filetype is set
+            vim.api.nvim_create_autocmd({ "FileType" }, {
+                pattern = { "go" },
+                callback = function()
+                    vim.treesitter.start()
+                    vim.schedule(function()
+                        vim.cmd("TSEnable highlight")
+                    end)
+                end
+            })
+        end,
         opts = {
-            highlight = { enable = true },
+            highlight = {
+                enable = true,
+                additional_vim_regex_highlighting = false,
+            },
             indent = { enable = true },
             ensure_installed = {
-                "bash",
-                "c",
-                "go",
-                "gomod",
-                "gowork",
-                "gosum",
-                "diff",
-                "html",
-                "javascript",
-                "jsdoc",
-                "json",
-                "jsonc",
-                "lua",
-                "luadoc",
-                "luap",
-                "markdown",
-                "markdown_inline",
-                "python",
-                "query",
-                "regex",
-                "toml",
-                "tsx",
-                "typescript",
-                "vim",
-                "vimdoc",
-                "xml",
-                "yaml",
+                -- your existing ensure_installed table...
             },
-            incremental_selection = {
-                enable = true,
-                keymaps = {
-                    init_selection = "<C-space>",
-                    node_incremental = "<C-space>",
-                    scope_incremental = false,
-                    node_decremental = "<bs>",
-                },
-            },
-            textobjects = {
-                move = {
-                    enable = true,
-                    goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer" },
-                    goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer" },
-                    goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer" },
-                    goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer" },
-                },
-            },
+            sync_install = true,
         },
-
         config = function(i, opts)
             if type(opts.ensure_installed) == "table" then
-                ---@type table<string, boolean>
                 local added = {}
                 opts.ensure_installed = vim.tbl_filter(function(lang)
                     if added[lang] then
@@ -87,6 +54,9 @@ return {
         "davidmh/mdx.nvim",
         config = true,
         dependencies = { "nvim-treesitter/nvim-treesitter" }
+    },
+    {
+        "nvim-treesitter/playground"
     }
 
 }
