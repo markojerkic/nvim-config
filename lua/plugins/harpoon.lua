@@ -49,7 +49,15 @@ return {
         -- REQUIRED
 
         vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end)
-        vim.keymap.set("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+        vim.keymap.set("n", "<leader>h", function()
+            harpoon.ui:toggle_quick_menu(harpoon:list(),
+                {
+                    border = "rounded",
+                    title_pos = "center",
+                    ui_width_ratio = 0.90,
+                }
+            )
+        end)
 
         -- Set <space>1..<space>5 be my shortcuts to moving to the files
         for _, idx in ipairs { 1, 2, 3, 4, 5, 6, 7, 8 } do

@@ -4,6 +4,8 @@ return {
     config = function()
         local java_formatter = os.getenv("HOME") ..
             "/.local/share/nvim/mason/packages/google-java-format/google-java-format"
+        local sql_formatter = os.getenv("HOME") ..
+            "/.local/share/nvim/mason/packages/sql-formatter/node_modules/sql-formatter/bin/sql-formatter-cli.cjs"
 
         require("conform").setup({
             formatters_by_ft = {
@@ -19,9 +21,10 @@ return {
                 javascript = { "biome", "prettier", stop_after_first = true },
                 typescript = { "biome", "prettier", stop_after_first = true },
                 json = { "biome", "prettier", stop_after_first = true },
-                html = { "biome", "prettier", stop_after_first = true },
+                html = { "prettier" },
                 css = { "biome", "prettier", stop_after_first = true },
                 tsx = { "biome", "prettier", stop_after_first = true },
+                sql = { "sqlfmt", lsp_format = "fallback", stop_after_first = true },
             },
             formatters = {
                 google_java_format = {
@@ -29,6 +32,11 @@ return {
                     args = { "-" },
                     stdin = true,
                 },
+                sqlfmt = {
+                    command = sql_formatter,
+                    args = {},
+                    stdin = true,
+                }
             },
             format_after_save = {
                 lsp_format = "fallback",
