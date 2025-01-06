@@ -19,11 +19,13 @@ return {
 
                 -- Conform will run the first available formatter
                 javascript = { "biome", "prettier", stop_after_first = true },
+                javascriptreact = { "biome", "prettier", stop_after_first = true },
                 typescript = { "biome", "prettier", stop_after_first = true },
+                typescriptreact = { "biome", "prettier", stop_after_first = true },
+                tsx = { "biome", "prettier", stop_after_first = true },
                 json = { "biome", "prettier", stop_after_first = true },
                 html = { "prettier" },
                 css = { "biome", "prettier", stop_after_first = true },
-                tsx = { "biome", "prettier", stop_after_first = true },
                 sql = { "sqlfmt", lsp_format = "fallback", stop_after_first = true },
             },
             formatters = {
