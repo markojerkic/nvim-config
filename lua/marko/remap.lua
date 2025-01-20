@@ -49,10 +49,6 @@ keymap("n", "<leader>cp", [["+p]])
 -- Delete to void register
 keymap({ "n", "v" }, "<leader>d", [["_d]])
 
--- Sessionizer directly in Vim
-keymap({ "n", "t" }, "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
--- keymap({ "n", "t" }, "<C-b>", "<cmd>silent !tmux neww cb<CR>")
-
 keymap({ "n", "t" }, "<C-s>", "<cmd>silent !tmux neww switch-session<CR>")
 keymap({ "n", "t" }, "<A-o>", function()
     require("marko.util.colors").toggleColouredPencils()

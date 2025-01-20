@@ -7,6 +7,7 @@ return {
         config = function()
             require('marko.config.telescope')
             require("marko.config.background-image").setup()
+            require("marko.config.sessionizer").setup()
         end,
     },
     {

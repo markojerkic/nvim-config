@@ -1,8 +1,8 @@
 -- Set tabs to 2 spaces specifically for Java files
-vim.opt_local.tabstop = 2       -- Set tab character width to 2 spaces
-vim.opt_local.shiftwidth = 2    -- Set indentation width to 2 spaces
-vim.opt_local.expandtab = true  -- Use spaces instead of tabs
-vim.opt_local.cmdheight = 1 -- more space in the neovim command line for displaying messages
+vim.opt_local.tabstop = 2      -- Set tab character width to 2 spaces
+vim.opt_local.shiftwidth = 2   -- Set indentation width to 2 spaces
+vim.opt_local.expandtab = true -- Use spaces instead of tabs
+vim.opt_local.cmdheight = 1    -- more space in the neovim command line for displaying messages
 
 local fn = vim.fn
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -26,7 +26,6 @@ CONFIG = "linux"
 -- Find root of project
 local root_markers = { ".git", "mvnw", "gradlew" }
 local root_dir = require("jdtls.setup").find_root(root_markers)
-require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew" })
 if root_dir == "" then
     return
 end
