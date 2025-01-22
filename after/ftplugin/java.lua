@@ -116,6 +116,7 @@ local get_bundles = function()
     local test_runner_base_dir = home .. '/.local/share/nvim/mason/packages/java-test/extension/server/'
     vim.list_extend(bundles, vim.split(vim.fn.glob(test_runner_base_dir .. "*.jar", true), "\n"))
 
+    vim.list_extend(bundles, require("spring_boot").java_extensions())
     return bundles
 end
 
@@ -123,6 +124,10 @@ local extendedClientCapabilities = jdtls.extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
 -- local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+
+require('spring_boot').setup({
+    ls_path = home .. "/.local/share/nvim/mason/packages/spring-boot-tools/extension/language-server"
+})
 
 local workspace_dir = WORKSPACE_PATH .. vim.fn.fnamemodify(root_dir, ":h:t") .. "/" .. vim.fn.fnamemodify(root_dir, ":t");
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
@@ -209,6 +214,7 @@ local config = {
         require('jdtls').setup_dap({ hotcodereplace = 'auto' })
     end
 }
+
 
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.

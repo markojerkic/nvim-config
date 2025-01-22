@@ -14,6 +14,13 @@ return {
         'williamboman/mason.nvim',
         lazy = false,
         config = true,
+        opts = {
+            registries = {
+                'github:nvim-java/mason-registry',
+                'github:mason-org/mason-registry',
+            },
+        },
+
     },
 
     -- Autocompletion
@@ -123,7 +130,7 @@ return {
             end)
 
             require('mason-lspconfig').setup({
-                ensure_installed = { "eslint" },
+                ensure_installed = { "jdtls", "eslint", "ts_ls", "lua_ls", "angularls", "gopls", "gradle_ls" },
                 handlers = {
                     -- this first function is the "default handler"
                     -- it applies to every language server without a "custom handler"
