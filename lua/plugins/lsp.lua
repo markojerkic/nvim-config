@@ -122,11 +122,37 @@ return {
                 end
             end)
 
-            require('java').setup()
-            require('lspconfig').jdtls.setup({})
+            require('java').setup({
+                jdk = {
+                    auto_install = false,
+                },
+                spring_boot_tools = {
+                    enable = true,
+                    version = '1.59.0',
+                },
+                java_test = {
+                    enable = true,
+                    version = '0.43.0',
+                },
+            })
+            require('lspconfig').jdtls.setup({
+                settings = {
+                    java = {
+                        configuration = {
+                            runtimes = {
+                                {
+                                    name = "JavaSE-21",
+                                    path = os.getenv("HOME") .. "/.sdkman/candidates/java/current/bin",
+                                    default = true,
+                                }
+                            }
+                        }
+                    }
+                }
+            })
 
             require('mason-lspconfig').setup({
-                ensure_installed = { "eslint" },
+                ensure_installed = { "eslint", "ts_ls", "lua_ls", "angularls", "gopls", "gradle_ls" },
                 handlers = {
                     -- this first function is the "default handler"
                     -- it applies to every language server without a "custom handler"
