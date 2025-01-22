@@ -122,6 +122,9 @@ return {
                 end
             end)
 
+            require('java').setup()
+            require('lspconfig').jdtls.setup({})
+
             require('mason-lspconfig').setup({
                 ensure_installed = { "eslint" },
                 handlers = {
