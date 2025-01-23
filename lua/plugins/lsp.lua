@@ -123,7 +123,7 @@ return {
             end)
 
             require('mason-lspconfig').setup({
-                ensure_installed = { "eslint" },
+                ensure_installed = { "eslint", "jdtls", "java-test", "ts_ls", "angularls", "lua_ls", "google-java-format", "gopls", "prettier" },
                 handlers = {
                     -- this first function is the "default handler"
                     -- it applies to every language server without a "custom handler"
