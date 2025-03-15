@@ -19,6 +19,8 @@ return {
 
                 markdown = { "prettier" },
 
+                templ = { "templ" },
+
                 -- Conform will run the first available formatter
                 javascript = { "biome", "prettier", stop_after_first = true },
                 javascriptreact = { "biome", "prettier", stop_after_first = true },
