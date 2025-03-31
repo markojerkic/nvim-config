@@ -57,6 +57,7 @@ return {
 					{ name = "vsnip" },
 					{ name = "path" },
 					{ name = "buffer" },
+					{ name = "supermaven" },
 				},
 				snippet = {
 					expand = function(args)
