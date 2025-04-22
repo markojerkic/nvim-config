@@ -133,6 +133,37 @@ return {
 						require("lspconfig")[server_name].setup({})
 					end,
 
+					ts_ls = function()
+						require("lspconfig").ts_ls.setup({
+							settings = {
+								typescript = {
+									inlayHints = {
+										includeInlayParameterNameHints = "all",
+										includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+										includeInlayFunctionParameterTypeHints = true,
+										includeInlayVariableTypeHints = false,
+										includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+										includeInlayPropertyDeclarationTypeHints = false,
+										includeInlayFunctionLikeReturnTypeHints = false,
+										includeInlayEnumMemberValueHints = false,
+									},
+								},
+								javascript = {
+									inlayHints = {
+										includeInlayParameterNameHints = "all",
+										includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+										includeInlayFunctionParameterTypeHints = true,
+										includeInlayVariableTypeHints = true,
+										includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+										includeInlayPropertyDeclarationTypeHints = true,
+										includeInlayFunctionLikeReturnTypeHints = true,
+										includeInlayEnumMemberValueHints = true,
+									},
+								},
+							},
+						})
+					end,
+
 					-- this is the "custom handler" for `lua_ls`
 					lua_ls = function()
 						-- (Optional) Configure lua language server for neovim
