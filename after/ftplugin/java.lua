@@ -83,8 +83,8 @@ Get_eclipse_equinix_launcher = function()
 end
 
 Get_lombok_javaagent = function()
-	if is_file_exist(home .. "/.local/share/nvim/mason/share/jdtls/lombok.jar") then
-		return string.format("-javaagent:%s", home .. "/.local/share/nvim/mason/share/jdtls/lombok.jar")
+	if is_file_exist(home .. "/.local/share/nvim/mason/packages/jdtls/lombok.jar") then
+		return string.format("-javaagent:%s", home .. "/.local/share/nvim/mason/packages/jdtls/lombok.jar")
 	end
 
 	local lombok_dir = home .. "/.m2/repository/org/projectlombok/lombok/"
@@ -179,6 +179,12 @@ local config = {
 					profile = "GoogleStyle",
 				},
 			},
+			inlayHints = {
+				parameterNames = {
+					enabled = "all",
+					exclusions = { "this" },
+				},
+			},
 		},
 
 		signatureHelp = { enabled = true },
@@ -226,8 +232,12 @@ local opts = { silent = true, remap = false }
 local lsp_config = require("marko.config.lsp")
 lsp_config.lsp_keymap(opts)
 
-vim.cmd("command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)")
-vim.cmd("command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)")
+vim.cmd(
+	"command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)"
+)
+vim.cmd(
+	"command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)"
+)
 vim.cmd("command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()")
 -- vim.cmd "command! -buffer JdtJol lua require('jdtls').jol()"
 vim.cmd("command! -buffer JdtBytecode lua require('jdtls').javap()")
