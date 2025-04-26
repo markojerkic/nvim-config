@@ -1,8 +1,5 @@
 return {
     {
-        "folke/tokyonight.nvim",
-    },
-    {
         "catppuccin/nvim",
         lazy = false,
         name = "catppuccin",
@@ -16,11 +13,5 @@ return {
     {
         "rose-pine/neovim",
         name = "rose-pine",
-    },
-    {
-        "olivercederborg/poimandres.nvim",
-    },
-    {
-        "rebelot/kanagawa.nvim",
     }
 }
