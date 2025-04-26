@@ -29,7 +29,7 @@ return {
                 tsx = { "biome", "prettier", stop_after_first = true },
                 json = { "biome", "prettier", stop_after_first = true },
                 html = { "prettier" },
-                css = { "biome", "prettier", stop_after_first = true },
+                css = { "prettier", stop_after_first = true },
                 sql = { "sqlfmt", lsp_format = "fallback", stop_after_first = true },
             },
             formatters = {
