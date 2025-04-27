@@ -92,8 +92,9 @@ return {
 
             vim.api.nvim_create_autocmd('LspAttach', {
                 desc = 'LSP actions',
-                callback = function(args)
-
+                callback = function(event)
+                    local opts = { buffer = event.buf }
+                    keymaps.lsp_keymap(opts)
                 end
             })
 
