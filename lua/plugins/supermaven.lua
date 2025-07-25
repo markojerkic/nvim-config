@@ -11,7 +11,7 @@ return {
 				suggestion_color = "#d799dd",
 				cterm = 13,
 			},
-			ignore_filetypes = { log = true },
+			ignore_filetypes = { "log" },
 		})
 	end,
 }

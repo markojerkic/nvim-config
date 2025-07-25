@@ -16,7 +16,7 @@ keymap("", "<Space>", "<Nop>", opts)
 
 keymap("n", "<C-e>", "<cmd>:Oil<CR>", opts)
 keymap("n", "<S-e>", function()
-    require("oil").open_float()
+	require("oil").open_float()
 end, opts)
 
 -- Normal --
@@ -46,12 +46,15 @@ keymap({ "n", "v" }, "<leader>y", [["+y]])
 keymap("n", "<leader>Y", [["+Y]])
 keymap("n", "<leader>cp", [["+p]])
 
+-- Open a file in a new tab
+keymap("n", "<leader>T", ":tabedit %<CR>", opts)
+
 -- Delete to void register
 keymap({ "n", "v" }, "<leader>d", [["_d]])
 
 keymap({ "n", "t" }, "<C-s>", "<cmd>silent !tmux neww switch-session<CR>")
 keymap({ "n", "t" }, "<A-o>", function()
-    require("marko.util.colors").toggleColouredPencils()
+	require("marko.util.colors").toggleColouredPencils()
 end)
 
 -- Quickfix errors
@@ -91,6 +94,3 @@ keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-
--- Prettier
-keymap("n", "<leader>p", function() vim.lsp.buf.format({ name = "prettier" }) end, opts)
